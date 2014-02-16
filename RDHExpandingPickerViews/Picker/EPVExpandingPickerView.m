@@ -61,6 +61,8 @@
 
 -(void)commonInit
 {
+    [self subclassCalled];
+    
     [super commonInit];
     
     _disabledWhenEmpty = YES;

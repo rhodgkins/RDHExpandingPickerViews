@@ -38,8 +38,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    
+        
     EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
     datePickerInputView.titleLabel.text = @"Title";

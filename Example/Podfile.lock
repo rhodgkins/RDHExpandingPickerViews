@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RDHExpandingPickerViews: 7437af3debdd4ecd2e8ea0749102032f9692f4ae
+  RDHExpandingPickerViews: 630d6e9719aa37f68a77a8701bf70d0001bf977b
   UIView-Autolayout: d274098a5cbd5c1171db1f2638cbfaf4fba97c74
 
 COCOAPODS: 0.29.0

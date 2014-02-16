@@ -30,6 +30,8 @@ static void *EPVContextDatePickerMode = &EPVContextDatePickerMode;
 
 -(void)commonInit
 {
+    [self subclassCalled];
+    
     [super commonInit];
     
     // Observer after so we don't get any calls when initially setting the selected object.

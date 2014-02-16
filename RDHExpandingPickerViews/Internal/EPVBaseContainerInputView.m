@@ -18,6 +18,10 @@ const EPVPickerViewHeight EPVPickerViewHeightStandard = 180.0;
 const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 @interface EPVBaseContainerInputView ()
+{
+@private
+    BOOL subclassInstantiation;
+}
 
 /// Button that activates the view.
 @property (nonatomic, weak, readonly) EPVActivationButton *button;
@@ -33,6 +37,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        subclassInstantiation = NO;
         [self commonInit];
     }
     return self;
@@ -43,13 +48,23 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Initialization code
+        subclassInstantiation = NO;
         [self commonInit];
     }
     return self;
 }
 
+-(void)subclassCalled
+{
+    subclassInstantiation = YES;
+}
+
 -(void)commonInit
 {
+    if (!subclassInstantiation) {
+        [NSException raise:NSInternalInconsistencyException format:@"%@ cannot be used directly, a subclass must be used.", NSStringFromClass([self class])];
+    }
+    
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.clipsToBounds = NO;
     self.backgroundColor = [UIColor clearColor];

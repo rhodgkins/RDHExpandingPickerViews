@@ -12,6 +12,8 @@
 
 #pragma mark - Exposed base class methods
 
+-(void)subclassCalled;
+
 -(void)commonInit;
 
 -(void)updateValueDisplay;
