@@ -8,9 +8,7 @@
 
 #import "EPVActivationButton.h"
 
-#import "EPVBaseContainerInputView_EPVInternal.h"
-
-const UIControlState UIControlStateActivated = UIControlStateApplication;
+const UIControlState RDHControlStateActivated = UIControlStateApplication;
 
 static void *EPVContextAttributedText = &EPVContextAttributedText;
 static void *EPVContextText = &EPVContextText;
@@ -53,7 +51,6 @@ static void *EPVContextText = &EPVContextText;
     
     UILabel *infoLabel = [UILabel new];
     infoLabel.backgroundColor = [UIColor clearColor];
-    DEBUG_COLOR(infoLabel, redColor);
     infoLabel.textAlignment = NSTextAlignmentLeft;
     infoLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     infoLabel.numberOfLines = 1;
@@ -61,7 +58,6 @@ static void *EPVContextText = &EPVContextText;
     _infoLabel = infoLabel;
     
     // Truncate end of title text
-    DEBUG_COLOR(self.titleLabel, brownColor);
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.titleLabel.numberOfLines = 1;
     
@@ -100,16 +96,11 @@ static void *EPVContextText = &EPVContextText;
 -(void)setActivated:(BOOL)activated
 {
     _activated = activated;
-    // Toggle change of state
-    BOOL enabled = super.enabled;
-    super.enabled = !enabled;
-    super.enabled = enabled;
-    [self layoutIfNeeded];
 }
 
 -(UIControlState)state
 {
-    return super.state | ([self isActivated] ? UIControlStateActivated : 0);
+    return super.state | ([self isActivated] ? RDHControlStateActivated : 0);
 }
 
 -(void)setLabelEdgeInsets:(UIEdgeInsets)labelEdgeInsets

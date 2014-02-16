@@ -37,12 +37,14 @@
 		3360A9F4CF934E56B3235F72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4499E90B18AFC5B200C49C4D /* EPVExpandingPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVExpandingPickerView.h; sourceTree = "<group>"; };
 		4499E90C18AFC5B200C49C4D /* EPVExpandingPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVExpandingPickerView.m; sourceTree = "<group>"; };
-		4499E90D18AFDA8200C49C4D /* NSValue+RDHSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+RDHSelector.h"; sourceTree = "<group>"; };
-		4499E90E18AFDA8200C49C4D /* NSValue+RDHSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+RDHSelector.m"; sourceTree = "<group>"; };
 		4499E91018B003F200C49C4D /* EPVDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVDatePicker.h; sourceTree = "<group>"; };
 		4499E91118B003F200C49C4D /* EPVDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVDatePicker.m; sourceTree = "<group>"; };
-		4499E91218B0F60400C49C4D /* UIImage+RDHColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RDHColor.h"; sourceTree = "<group>"; };
-		4499E91318B0F60400C49C4D /* UIImage+RDHColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RDHColor.m"; sourceTree = "<group>"; };
+		4499E91518B11AA100C49C4D /* NSValue+RDHSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSValue+RDHSelector.h"; sourceTree = "<group>"; };
+		4499E91618B11AA100C49C4D /* NSValue+RDHSelector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSValue+RDHSelector.m"; sourceTree = "<group>"; };
+		4499E91718B11AA100C49C4D /* UIImage+RDHColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RDHColor.h"; sourceTree = "<group>"; };
+		4499E91818B11AA100C49C4D /* UIImage+RDHColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RDHColor.m"; sourceTree = "<group>"; };
+		4499E91918B12B0200C49C4D /* NSArray+RDHFill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+RDHFill.h"; sourceTree = "<group>"; };
+		4499E91A18B12B0200C49C4D /* NSArray+RDHFill.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RDHFill.m"; sourceTree = "<group>"; };
 		44D5B80A18AF7B600034A875 /* RDHExpandingPickerViews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDHExpandingPickerViews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D5B80D18AF7B600034A875 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		44D5B80F18AF7B600034A875 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,6 +98,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4499E91418B11AA100C49C4D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4499E91518B11AA100C49C4D /* NSValue+RDHSelector.h */,
+				4499E91618B11AA100C49C4D /* NSValue+RDHSelector.m */,
+				4499E91918B12B0200C49C4D /* NSArray+RDHFill.h */,
+				4499E91A18B12B0200C49C4D /* NSArray+RDHFill.m */,
+				4499E91718B11AA100C49C4D /* UIImage+RDHColor.h */,
+				4499E91818B11AA100C49C4D /* UIImage+RDHColor.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		44D5B80118AF7B600034A875 = {
 			isa = PBXGroup;
 			children = (
@@ -201,10 +216,7 @@
 				44D5B85218AF8B0C0034A875 /* EPVActivationButton.m */,
 				4499E91018B003F200C49C4D /* EPVDatePicker.h */,
 				4499E91118B003F200C49C4D /* EPVDatePicker.m */,
-				4499E90D18AFDA8200C49C4D /* NSValue+RDHSelector.h */,
-				4499E90E18AFDA8200C49C4D /* NSValue+RDHSelector.m */,
-				4499E91218B0F60400C49C4D /* UIImage+RDHColor.h */,
-				4499E91318B0F60400C49C4D /* UIImage+RDHColor.m */,
+				4499E91418B11AA100C49C4D /* Utils */,
 			);
 			path = Internal;
 			sourceTree = "<group>";

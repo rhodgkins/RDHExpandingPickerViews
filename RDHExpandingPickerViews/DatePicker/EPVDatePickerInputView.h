@@ -8,14 +8,28 @@
 
 #import "EPVBaseContainerInputView.h"
 
+/// Expanding picker view backed by a `UIDatePicker`.
 @interface EPVDatePickerInputView : EPVBaseContainerInputView
 
+/// The backing data picker.
 @property (nonatomic, weak, readonly) UIDatePicker *pickerView;
 
 #pragma mark - Date selection
+/// @name Date selection
 
-@property (nonatomic, copy) NSDate *selectedObject;
+/// The selected `NSDate`.
+@property (nonatomic, copy) NSDate *selectedDate;
 
--(void)setSelectedObject:(NSDate *)selectedObject animated:(BOOL)animated;
+/// @see selectedDate
+-(void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated;
+
+#pragma mark - Countdown time selection
+/// @name Countdown time selection
+
+/// The selected `NSTimeInterval`.
+@property (nonatomic, assign) NSTimeInterval selectedTimeInterval;
+
+/// @see selectedTimeInterval
+-(void)setSelectedTimeInterval:(NSTimeInterval)selectedTimeInterval animated:(BOOL)animated;
 
 @end

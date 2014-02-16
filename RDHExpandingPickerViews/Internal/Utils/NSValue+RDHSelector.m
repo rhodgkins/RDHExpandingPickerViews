@@ -1,6 +1,5 @@
 //
 //  NSValue+RDHSelector.m
-//  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
@@ -10,9 +9,9 @@
 
 @implementation NSValue (RDHSelector)
 
-+(instancetype)valueWithSelector:(SEL)selector
++(instancetype)valueWithSelector:(SEL)aSelector
 {
-    return [NSValue valueWithBytes:&selector objCType:@encode(SEL)];
+    return [NSValue valueWithBytes:&aSelector objCType:@encode(SEL)];
 }
 
 -(SEL)selector

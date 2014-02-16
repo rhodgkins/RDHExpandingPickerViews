@@ -50,9 +50,9 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 -(void)commonInit
 {
-    DEBUG_COLOR(self, yellowColor);
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.clipsToBounds = NO;
+    self.backgroundColor = [UIColor clearColor];
     
     _displayHeight = 34;
     _pickerViewHeight = EPVPickerViewHeightStandard;
@@ -65,14 +65,13 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     EPVActivationButton *button = [EPVActivationButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     [button addTarget:self action:@selector(didTapActivationButton) forControlEvents:UIControlEventTouchUpInside];
-    DEBUG_COLOR(button, greenColor);
     [self addSubview:button];
     _button = button;
     
     UIView *pickerView = [self createPickerView];
     pickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     pickerView.alpha = 0;
-    DEBUG_COLOR(pickerView, purpleColor);
+    pickerView.backgroundColor = [UIColor clearColor];
     [self addSubview:pickerView];
     _pickerView = pickerView;
     
@@ -82,13 +81,38 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     _heightConstraint = heightConstraint;
     
     self.titleLabel.textColor = [UIColor darkTextColor];
-    self.titleLabel.highlightedTextColor = [UIColor lightTextColor];
+    self.titleLabel.highlightedTextColor = [UIColor darkTextColor];
     [self setDisplayedValueTextColor:[UIColor darkTextColor]];
+    [self setExpandedValueTextColor:[UIColor darkTextColor]];
+
+    // Placeholder defaults
     [self setPlaceholderValueTextColor:[UIColor lightGrayColor]];
+    [self setPlaceholderHighlightedValueTextColor:[UIColor darkGrayColor]];
     
     [self togglePicker:NO];
     
     self.selectedObject = nil;
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGRect buttonFrame = self.bounds;
+    buttonFrame.size.height = self.displayHeight;
+    self.button.frame = buttonFrame;
+    
+    CGRect pickerFrame = self.bounds;
+    pickerFrame.origin.y = CGRectGetMaxY(buttonFrame);
+    pickerFrame.size.height = self.pickerViewHeight;
+    pickerFrame.size.width = CGRectGetWidth(self.bounds);
+    self.pickerView.frame = pickerFrame;
+}
+
+-(void)setEnabled:(BOOL)enabled
+{
+    super.enabled = enabled;
+    self.button.enabled = enabled;
 }
 
 -(CGSize)intrinsicContentSize
@@ -113,8 +137,29 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
         _displayHeight = displayHeight;
         
         [self invalidateIntrinsicContentSize];
+        self.heightConstraint.constant = [self contentHeight];
         [self setNeedsLayout];
     }
+}
+
+-(void)setPickerViewHeight:(EPVPickerViewHeight)pickerViewHeight
+{
+    if (_pickerViewHeight != pickerViewHeight) {
+        _pickerViewHeight = pickerViewHeight;
+        
+        [self invalidateIntrinsicContentSize];
+        [self setNeedsLayout];
+    }
+}
+
+-(UIColor *)pickerViewBackgroundColor
+{
+    return self.pickerView.backgroundColor;
+}
+
+-(void)setPickerViewBackgroundColor:(UIColor *)pickerViewBackgroundColor
+{
+    self.pickerView.backgroundColor = pickerViewBackgroundColor;
 }
 
 -(void)setDisplayBackgroundColor:(UIColor *)displayBackgroundColor
@@ -145,24 +190,32 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     }
 }
 
--(void)setPickerViewHeight:(EPVPickerViewHeight)pickerViewHeight
+-(void)setDisplayExpandedBackgroundColor:(UIColor *)displayExpandedBackgroundColor
 {
-    if (_pickerViewHeight != pickerViewHeight) {
-        _pickerViewHeight = pickerViewHeight;
+    if (![_displayExpandedBackgroundColor isEqual:displayExpandedBackgroundColor]) {
+        _displayExpandedBackgroundColor = displayExpandedBackgroundColor;
         
-        [self invalidateIntrinsicContentSize];
-        [self setNeedsLayout];
+        UIImage *image = nil;
+        if (_displayExpandedBackgroundColor) {
+            image = [UIImage imageWithColor:_displayExpandedBackgroundColor];
+        }
+        [self.button setBackgroundImage:image forState:RDHControlStateActivated];
+        [self.button setBackgroundImage:image forState:RDHControlStateActivated | UIControlStateSelected];
     }
 }
 
--(UIColor *)pickerViewBackgroundColor
+-(void)setDisplayExpandedHighlightedBackgroundColor:(UIColor *)displayExpandedHighlightedBackgroundColor
 {
-    return self.pickerView.backgroundColor;
-}
-
--(void)setPickerViewBackgroundColor:(UIColor *)pickerViewBackgroundColor
-{
-    self.pickerView.backgroundColor = pickerViewBackgroundColor;
+    if (![_displayExpandedHighlightedBackgroundColor isEqual:displayExpandedHighlightedBackgroundColor]) {
+        _displayExpandedHighlightedBackgroundColor = displayExpandedHighlightedBackgroundColor;
+        
+        UIImage *image = nil;
+        if (_displayExpandedHighlightedBackgroundColor) {
+            image = [UIImage imageWithColor:_displayExpandedHighlightedBackgroundColor];
+        }
+        [self.button setBackgroundImage:image forState:RDHControlStateActivated | UIControlStateHighlighted];
+        [self.button setBackgroundImage:image forState:RDHControlStateActivated | UIControlStateHighlighted | UIControlStateSelected];
+    }
 }
 
 -(UIEdgeInsets)labelEdgeInsets
@@ -173,21 +226,6 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 -(void)setLabelEdgeInsets:(UIEdgeInsets)labelEdgeInsets
 {
     self.button.labelEdgeInsets = labelEdgeInsets;
-}
-
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    CGRect buttonFrame = self.bounds;
-    buttonFrame.size.height = self.displayHeight;
-    self.button.frame = buttonFrame;
-    
-    CGRect pickerFrame = self.bounds;
-    pickerFrame.origin.y = CGRectGetMaxY(buttonFrame);
-    pickerFrame.size.height = self.pickerViewHeight;
-    pickerFrame.size.width = CGRectGetWidth(self.bounds);
-    self.pickerView.frame = pickerFrame;
 }
 
 #pragma mark - Picker animation
@@ -239,6 +277,103 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     }
 }
 
+#pragma mark - Title label
+
+-(UILabel *)titleLabel
+{
+    return self.button.infoLabel;
+}
+
+#pragma mark - Value updating
+
+-(void)updateValueDisplay
+{
+    if (self.selectedObject) {
+        NSAttributedString *attributedTitle = [self attributedDisplayValueForSelectedObject];
+        if (attributedTitle) {
+            [self.button setAttributedTitle:attributedTitle forState:RDHControlStateActivated | UIControlStateSelected];
+            [self.button setAttributedTitle:attributedTitle forState:UIControlStateSelected];
+            [self.button setAttributedTitle:attributedTitle forState:UIControlStateSelected | UIControlStateHighlighted];
+            [self.button setAttributedTitle:attributedTitle forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted];
+        } else {
+            NSString *title = [self displayValueForSelectedObject];
+            [self.button setTitle:title forState:RDHControlStateActivated | UIControlStateSelected];
+            [self.button setTitle:title forState:UIControlStateSelected];
+            [self.button setTitle:title forState:UIControlStateSelected | UIControlStateHighlighted];
+            [self.button setTitle:title forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted];
+        }
+    } else {
+        [self.button setTitle:nil forState:UIControlStateSelected];
+        [self.button setTitle:nil forState:UIControlStateSelected | UIControlStateHighlighted];
+        [self.button setAttributedTitle:nil forState:UIControlStateSelected];
+        [self.button setAttributedTitle:nil forState:UIControlStateSelected | UIControlStateHighlighted];
+    }
+}
+
+#pragma mark - Responder chain
+
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+-(BOOL)becomeFirstResponder
+{
+    BOOL result = [super becomeFirstResponder];
+    if (result) {
+        [self togglePicker:YES];
+        [self sendActionsForControlEvents:UIControlEventEditingDidBegin];
+        // When we're allowed to become first responder set the initial object
+        if (!self.selectedObject) {
+            self.selectedObject = self.initiallySelectedObject;
+        }
+    }
+    return result;
+}
+
+-(BOOL)canResignFirstResponder
+{
+    return YES;
+}
+
+-(BOOL)resignFirstResponder
+{
+    BOOL result = [super resignFirstResponder];
+    if (result) {
+        [self togglePicker:YES];
+        [self sendActionsForControlEvents:UIControlEventEditingDidEnd];
+    }
+    return result;
+}
+
+#pragma mark - Required subclass methods
+
+-(UIView *)createPickerView
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a view", NSStringFromSelector(_cmd)] userInfo:nil];
+}
+
+-(NSString *)displayValueForSelectedObject
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a string", NSStringFromSelector(_cmd)] userInfo:nil];
+}
+
+#pragma mark - Optional subclass methods
+
+-(NSAttributedString *)attributedDisplayValueForSelectedObject
+{
+    return nil;
+}
+
+-(id)initiallySelectedObject
+{
+    return nil;
+}
+
+@end
+
+@implementation EPVBaseContainerInputView (RDHValueDisplay)
+
 #pragma mark - Value label display
 
 -(UIFont *)valueLabelFont
@@ -260,6 +395,13 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 {
     self.button.reversesTitleShadowWhenHighlighted = reversesValueShadowWhenHighlighted;
 }
+
+-(UILabel *)valueLabel
+{
+    return self.button.titleLabel;
+}
+
+#pragma mark - Text and shadow colors
 
 -(UIColor *)displayedValueTextColor
 {
@@ -285,26 +427,31 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 -(UIColor *)expandedValueTextColor
 {
-    return [self.button titleColorForState:UIControlStateActivated];
+    return [self.button titleColorForState:RDHControlStateActivated];
 }
 
 -(void)setExpandedValueTextColor:(UIColor *)expandedValueTextColor
 {
-    [self.button setTitleColor:expandedValueTextColor forState:UIControlStateActivated];
-    [self.button setTitleColor:expandedValueTextColor forState:UIControlStateActivated| UIControlStateSelected];
-    [self.button setTitleColor:expandedValueTextColor forState:UIControlStateActivated |UIControlStateSelected | UIControlStateHighlighted];
+    [self.button setTitleColor:expandedValueTextColor forState:RDHControlStateActivated];
+    [self.button setTitleColor:expandedValueTextColor forState:RDHControlStateActivated| UIControlStateSelected];
+    [self.button setTitleColor:expandedValueTextColor forState:RDHControlStateActivated |UIControlStateSelected | UIControlStateHighlighted];
 }
 
 -(UIColor *)expandedValueShadowColor
 {
-    return [self.button titleShadowColorForState:UIControlStateActivated];
+    return [self.button titleShadowColorForState:RDHControlStateActivated];
 }
 
 -(void)setExpandedValueShadowColor:(UIColor *)expandedValueShadowColor
 {
-    [self.button setTitleShadowColor:expandedValueShadowColor forState:UIControlStateSelected];
-    [self.button setTitleShadowColor:expandedValueShadowColor forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.button setTitleShadowColor:expandedValueShadowColor forState:RDHControlStateActivated];
+    [self.button setTitleShadowColor:expandedValueShadowColor forState:RDHControlStateActivated | UIControlStateSelected];
+    [self.button setTitleShadowColor:expandedValueShadowColor forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted];
 }
+
+@end
+
+@implementation EPVBaseContainerInputView (RDHPlaceholder)
 
 -(NSString *)placeholderValue
 {
@@ -328,6 +475,8 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     [self.button setAttributedTitle:attributedPlaceholderValue forState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
+#pragma mark - Text and shadow colors
+
 -(UIColor *)placeholderValueTextColor
 {
     return [self.button titleColorForState:UIControlStateNormal];
@@ -336,7 +485,6 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 -(void)setPlaceholderValueTextColor:(UIColor *)placeholderValueTextColor
 {
     [self.button setTitleColor:placeholderValueTextColor forState:UIControlStateNormal];
-    [self.button setTitleColor:placeholderValueTextColor forState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
 -(UIColor *)placeholderValueShadowColor
@@ -347,96 +495,26 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 -(void)setPlaceholderValueShadowColor:(UIColor *)placeholderValueShadowColor
 {
     [self.button setTitleShadowColor:placeholderValueShadowColor forState:UIControlStateNormal];
-    [self.button setTitleShadowColor:placeholderValueShadowColor forState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
--(UILabel *)valueLabel
+-(UIColor *)placeholderHighlightedValueTextColor
 {
-    return self.button.titleLabel;
+    return [self.button titleColorForState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
-#pragma mark - Title label
-
--(UILabel *)titleLabel
+-(void)setPlaceholderHighlightedValueTextColor:(UIColor *)placeholderHighlightedValueTextColor
 {
-    return self.button.infoLabel;
+    [self.button setTitleColor:placeholderHighlightedValueTextColor forState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
-#pragma mark - Value updating
-
--(void)updateValueDisplay
+-(UIColor *)placeholderHighlightedValueShadowColor
 {
-    if (self.selectedObject) {
-        NSAttributedString *attributedTitle = [self attributedDisplayValueForSelectedObject];
-        if (attributedTitle) {
-            [self.button setAttributedTitle:attributedTitle forState:UIControlStateActivated | UIControlStateSelected];
-            [self.button setAttributedTitle:attributedTitle forState:UIControlStateSelected];
-            [self.button setAttributedTitle:attributedTitle forState:UIControlStateSelected | UIControlStateHighlighted];
-        } else {
-            NSString *title = [self displayValueForSelectedObject];
-            [self.button setTitle:title forState:UIControlStateActivated | UIControlStateSelected];
-            [self.button setTitle:title forState:UIControlStateSelected];
-            [self.button setTitle:title forState:UIControlStateSelected | UIControlStateHighlighted];
-        }
-    } else {
-        [self.button setTitle:nil forState:UIControlStateSelected];
-        [self.button setTitle:nil forState:UIControlStateSelected | UIControlStateHighlighted];
-        [self.button setAttributedTitle:nil forState:UIControlStateSelected];
-        [self.button setAttributedTitle:nil forState:UIControlStateSelected | UIControlStateHighlighted];
-    }
+    return [self.button titleShadowColorForState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
-#pragma mark - Responder chain
-
--(BOOL)canBecomeFirstResponder
+-(void)setPlaceholderHighlightedValueShadowColor:(UIColor *)placeholderHighlightedValueShadowColor
 {
-    return YES;
-}
-
--(BOOL)becomeFirstResponder
-{
-    BOOL result = [super becomeFirstResponder];
-    if (result) {
-        [self togglePicker:YES];
-        // When we're allowed to become first responder set the initial object
-        if (!self.selectedObject) {
-            self.selectedObject = self.initiallySelectedObject;
-        }
-    }
-    return result;
-}
-
--(BOOL)canResignFirstResponder
-{
-    return YES;
-}
-
--(BOOL)resignFirstResponder
-{
-    BOOL result = [super resignFirstResponder];
-    if (result) {
-        [self togglePicker:YES];
-    }
-    return result;
-}
-
-#pragma mark - Required subclass methods
-
--(UIView *)createPickerView
-{
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a view", NSStringFromSelector(_cmd)] userInfo:nil];
-}
-
--(NSString *)displayValueForSelectedObject
-{
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a string", NSStringFromSelector(_cmd)] userInfo:nil];
-}
-
-#pragma mark - Optional subclass methods
-
--(NSAttributedString *)attributedDisplayValueForSelectedObject
-{
-    return nil;
+    [self.button setTitleShadowColor:placeholderHighlightedValueShadowColor forState:UIControlStateNormal | UIControlStateHighlighted];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// Picker view heights
 typedef CGFloat EPVPickerViewHeight;
 
 /// 162 pts
@@ -17,14 +18,32 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightStandard;
 /// 216 pts
 UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 
+/**
+ * Base class which controls the displaying and showing of the subclasses pickerView.
+ * 
+ * ### Control Events ###
+ *
+ * `UIControlEventEditingDidBegin` when the expanded picker view becomes first responder.
+ *
+ * `UIControlEventEditingDidEnd` when the expanded picker view resigns first responder.
+ *
+ * `UIControlEventValueChanged` when the selection changes in the picker by user action. Check `selectedObject` for the new value.
+ */
 @interface EPVBaseContainerInputView : UIControl
 
+/// Height of the view when not expanded.
 @property (nonatomic, assign) CGFloat displayHeight;
 
+/// Background color for the normal state when this control has not been touched or is not expanded
 @property (nonatomic, strong) UIColor *displayBackgroundColor;
 
 @property (nonatomic, strong) UIColor *displayHighlightedBackgroundColor;
 
+@property (nonatomic, strong) UIColor *displayExpandedBackgroundColor;
+
+@property (nonatomic, strong) UIColor *displayExpandedHighlightedBackgroundColor;
+
+/// Size of the picker view when expanded. Default value is `EPVPickerViewHeightStandard`.
 @property (nonatomic, assign) EPVPickerViewHeight pickerViewHeight;
 
 @property (nonatomic, strong) UIColor *pickerViewBackgroundColor;
@@ -38,6 +57,11 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 /// The label that shows what can be selected.
 @property (nonatomic, weak, readonly) UILabel *titleLabel;
 
+@end
+
+///
+@interface EPVBaseContainerInputView (RDHValueDisplay)
+
 #pragma mark - Value label display
 /// @name Configuring the value label display
 
@@ -46,6 +70,12 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 
 /// This is for both the selected value and `placeholderValue`. If `YES`, the shadow changes from engrave to emboss appearance when highlighted. The default value is `NO`.
 @property (nonatomic, assign) BOOL reversesValueShadowWhenHighlighted;
+
+/// The value label itself, this should **not** be used for setting the font, text value, attributed text value, text color or shadow color.
+@property (nonatomic, weak, readonly) UILabel *valueLabel;
+
+#pragma mark - Text and shadow colors
+/// @name Text and shadow colors
 
 /// The displayed value text color.
 @property (nonatomic, strong) UIColor *displayedValueTextColor;
@@ -59,11 +89,21 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 /// The value text shadow color when the picker is expanded.
 @property (nonatomic, strong) UIColor *expandedValueShadowColor;
 
+@end
+
+///
+@interface EPVBaseContainerInputView (RDHPlaceholder)
+
+/// @name Display value
+
 /// Placeholder text for when no value is selected.
 @property (nonatomic, copy) NSString *placeholderValue;
 
 /// Attributed placeholder text for when no value is selected.
 @property (nonatomic, copy) NSAttributedString *attributedPlaceholderValue;
+
+#pragma mark - Text and shadow colors
+/// @name Text and shadow colors
 
 /// The placeholder value text color.
 @property (nonatomic, strong) UIColor *placeholderValueTextColor;
@@ -71,7 +111,10 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 /// The placeholder value text shadow color.
 @property (nonatomic, strong) UIColor *placeholderValueShadowColor;
 
-/// The value label itself, this should **not** be used for setting the font, text value, attributed text value, text color or shadow color.
-@property (nonatomic, weak, readonly) UILabel *valueLabel;
+/// The placeholder highlighted value text color.
+@property (nonatomic, strong) UIColor *placeholderHighlightedValueTextColor;
+
+/// The placeholder highlighted value text shadow color.
+@property (nonatomic, strong) UIColor *placeholderHighlightedValueShadowColor;
 
 @end

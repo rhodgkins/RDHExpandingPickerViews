@@ -10,6 +10,7 @@
 #import "EPVBaseContainerInputView_EPVInternal.h"
 
 #import "NSValue+RDHSelector.h"
+#import "NSArray+RDHFill.h"
 
 @interface EPVExpandingPickerView ()<UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -27,6 +28,7 @@
         self.pickerView.delegate = self;
         self.pickerView.dataSource = self;
         [self reloadData];
+        [self updateValueDisplay];
     }
 }
 
@@ -43,16 +45,7 @@
 
 -(NSArray *)initiallySelectedObject
 {
-    NSUInteger count = [self numberOfComponents];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
-    
-    NSNumber *zero = @(0);
-    
-    for (NSUInteger component = 0; component < count; component++) {
-        [array addObject:zero];
-    }
-    
-    return [array copy];
+    return [NSArray arrayFilledWithCount:[self numberOfComponents] ofObject:@(0)];
 }
 
 -(NSString *)displayValueForSelectedObject
@@ -62,6 +55,17 @@
         value = [self.delegate expandingPickerView:self displayValueForSelectedObject:self.selectedObject];
     }
     return value;
+}
+
+#pragma mark - Overriden super class methods
+
+-(void)commonInit
+{
+    [super commonInit];
+    
+    _disabledWhenEmpty = YES;
+    
+    [self updateEnabled];
 }
 
 -(NSAttributedString *)attributedDisplayValueForSelectedObject
@@ -79,9 +83,11 @@
 
 -(void)setSelectedObject:(NSArray *)selectedObject animated:(BOOL)animated
 {
+    NSArray *previousSelectedObject = self.selectedObject;
+    
     [super setSelectedObject:selectedObject animated:animated];
     
-    if (![self.selectedObject isEqualToArray:selectedObject]) {
+    if (![previousSelectedObject isEqualToArray:selectedObject]) {
         
         if (selectedObject) {
             NSAssert([selectedObject count] == [self numberOfComponents], @"The number of items in the selectedObjects array must equal the number of components in the expanding picker view");
@@ -93,14 +99,21 @@
                 [self.pickerView selectRow:[row integerValue] inComponent:component animated:animated];
             }];
         } else {
-            for (NSUInteger component = 0; component < [self numberOfComponents]; component++) {
-                [self.pickerView selectRow:0 inComponent:component animated:animated];
-            }
+            [self setSelectedObject:self.initiallySelectedObject animated:animated];
         }
     }
 }
 
 #pragma mark - Class specific methods
+
+-(void)setDisabledWhenEmpty:(BOOL)disabledWhenEmpty
+{
+    if (_disabledWhenEmpty != disabledWhenEmpty) {
+        _disabledWhenEmpty = disabledWhenEmpty;
+        
+        [self updateEnabled];
+    }
+}
 
 -(void)reloadData
 {
@@ -209,6 +222,8 @@
     }
     selectedObjects[component] = @(row);
     self.selectedObject = selectedObjects;
+    
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
     
     if ([self.delegate respondsToSelector:@selector(expandingPickerView:didSelectRow:inComponent:)]) {
         [self.delegate expandingPickerView:self didSelectRow:row inComponent:component];

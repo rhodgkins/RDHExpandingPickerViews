@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/// Simple subclass that notifies any observers that the date has changed when calling `-[setDate:animated:]`.
+/// Simple subclass that notifies any observers that the date has changed when calling `-[UIDatePicker setDate:animated:]`.
 @interface EPVDatePicker : UIDatePicker
 
 @end
