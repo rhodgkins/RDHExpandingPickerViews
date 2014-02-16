@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
 
   s.platform = :ios, '7.0'
   s.source_files = 'RDHExpandingPickerViews/**/*.{h,m}'
-  s.private_header_files = '**/Internal/**'
+  s.private_header_files = '**/Internal/**/*'
 
 end
