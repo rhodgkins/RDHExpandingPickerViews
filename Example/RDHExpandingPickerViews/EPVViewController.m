@@ -32,12 +32,6 @@
 -(void)loadView
 {
     self.view = [UIScrollView new];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
         
     EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
