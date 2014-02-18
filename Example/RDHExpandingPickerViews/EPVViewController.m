@@ -36,6 +36,7 @@
     EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
     datePickerInputView.titleLabel.text = @"Title";
+    [datePickerInputView setTitle:@"Title" forState:~(0L)];
     datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
     datePickerInputView.placeholderValue = @"Date";
 //    datePickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
@@ -60,11 +61,11 @@
     countDownPickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
     countDownPickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
     countDownPickerInputView.placeholderValue = @"Count Down";
-    countDownPickerInputView.expandedValueTextColor = [UIColor purpleColor];
-    countDownPickerInputView.displayBackgroundColor = [UIColor redColor];
-    countDownPickerInputView.displayHighlightedBackgroundColor = [UIColor orangeColor];
-    countDownPickerInputView.displayExpandedBackgroundColor = [UIColor grayColor];
-    countDownPickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor magentaColor];
+//    countDownPickerInputView.expandedValueTextColor = [UIColor purpleColor];
+//    countDownPickerInputView.displayBackgroundColor = [UIColor redColor];
+//    countDownPickerInputView.displayHighlightedBackgroundColor = [UIColor orangeColor];
+//    countDownPickerInputView.displayExpandedBackgroundColor = [UIColor grayColor];
+//    countDownPickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor magentaColor];
     [countDownPickerInputView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [self.view addSubview:countDownPickerInputView];
     self.countDownPickerInputView = countDownPickerInputView;
@@ -76,8 +77,8 @@
     EPVExpandingPickerView *expandingPickerView = [EPVExpandingPickerView autoLayoutView];
     expandingPickerView.titleLabel.text = @"Title";
     expandingPickerView.placeholderValue = @"Picker";
-    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
-    expandingPickerView.displayHighlightedBackgroundColor = [UIColor orangeColor];
+//    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
+//    expandingPickerView.displayHighlightedBackgroundColor = [UIColor orangeColor];
     expandingPickerView.dataSource = self;
     expandingPickerView.delegate = self;
     expandingPickerView.selectedObject = nil;
