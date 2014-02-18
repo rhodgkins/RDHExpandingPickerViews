@@ -131,38 +131,38 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
     return super.state | ([self isActivated] ? RDHControlStateActivated : 0);
 }
 
--(void)setSelected:(BOOL)selected
-{
-    super.selected = selected;
-    
-    [self stateUpdated];
-}
+    -(void)setSelected:(BOOL)selected
+    {
+        super.selected = selected;
+        
+        [self stateUpdated];
+    }
 
--(void)setHighlighted:(BOOL)highlighted
-{
-    super.highlighted = highlighted;
-    
-    [self stateUpdated];
-}
+    -(void)setHighlighted:(BOOL)highlighted
+    {
+        super.highlighted = highlighted;
+        
+        [self stateUpdated];
+    }
 
--(void)setEnabled:(BOOL)enabled
-{
-    super.enabled = enabled;
-    
-    [self stateUpdated];
-}
+    -(void)setEnabled:(BOOL)enabled
+    {
+        super.enabled = enabled;
+        
+        [self stateUpdated];
+    }
 
--(void)setActivated:(BOOL)activated
-{
-    _activated = activated;
-    
-    [self stateUpdated];
-}
+    -(void)setActivated:(BOOL)activated
+    {
+        _activated = activated;
+        
+        [self stateUpdated];
+    }
 
--(void)stateUpdated
-{
-    [self updateInfoLabel];
-}
+    -(void)stateUpdated
+    {
+        [self updateInfoLabel];
+    }
 
 #pragma mark - Info label
 
@@ -171,7 +171,9 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
     self.infoLabel.text = self.currentInfoText;
     self.infoLabel.textColor = self.currentInfoColor;
     self.infoLabel.shadowColor = self.currentInfoShadowColor;
-    self.infoLabel.attributedText = self.currentInfoAttributedText;
+    if (self.currentInfoAttributedText) {
+        self.infoLabel.attributedText = self.currentInfoAttributedText;
+    }
 }
 
 #pragma mark - Info state
@@ -240,22 +242,46 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 -(NSString *)infoTextForState:(UIControlState)state
 {
-    return [self infoWithKey:RDHStateKeyText forState:state];
+    NSString *text = [self infoWithKey:RDHStateKeyText forState:state];
+    
+    if (!text & (state != UIControlStateNormal)) {
+        text = [self infoTextForState:UIControlStateNormal];
+    }
+    
+    return text;
 }
 
 -(UIColor *)infoColorForState:(UIControlState)state
 {
-    return [self infoWithKey:RDHStateKeyColor forState:state];
+    UIColor *color = [self infoWithKey:RDHStateKeyColor forState:state];
+    
+    if (!color & (state != UIControlStateNormal)) {
+        color = [self infoColorForState:UIControlStateNormal];
+    }
+    
+    return color;
 }
 
 -(UIColor *)infoShadowColorForState:(UIControlState)state
 {
-    return [self infoWithKey:RDHStateKeyShadowColor forState:state];
+    UIColor *color = [self infoWithKey:RDHStateKeyShadowColor forState:state];
+    
+    if (!color & (state != UIControlStateNormal)) {
+        color = [self infoShadowColorForState:UIControlStateNormal];
+    }
+    
+    return color;
 }
 
 -(NSAttributedString *)infoAttributedTextForState:(UIControlState)state
 {
-    return [self infoWithKey:RDHStateKeyAttributedText forState:state];
+    NSAttributedString *text = [self infoWithKey:RDHStateKeyAttributedText forState:state];
+    
+    if (!text & (state != UIControlStateNormal)) {
+        text = [self infoAttributedTextForState:UIControlStateNormal];
+    }
+    
+    return text;
 }
 
 -(NSString *)currentInfoText
