@@ -131,38 +131,38 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
     return super.state | ([self isActivated] ? RDHControlStateActivated : 0);
 }
 
-    -(void)setSelected:(BOOL)selected
-    {
-        super.selected = selected;
-        
-        [self stateUpdated];
-    }
+-(void)setSelected:(BOOL)selected
+{
+    super.selected = selected;
+    
+    [self stateUpdated];
+}
 
-    -(void)setHighlighted:(BOOL)highlighted
-    {
-        super.highlighted = highlighted;
-        
-        [self stateUpdated];
-    }
+-(void)setHighlighted:(BOOL)highlighted
+{
+    super.highlighted = highlighted;
+    
+    [self stateUpdated];
+}
 
-    -(void)setEnabled:(BOOL)enabled
-    {
-        super.enabled = enabled;
-        
-        [self stateUpdated];
-    }
+-(void)setEnabled:(BOOL)enabled
+{
+    super.enabled = enabled;
+    
+    [self stateUpdated];
+}
 
-    -(void)setActivated:(BOOL)activated
-    {
-        _activated = activated;
-        
-        [self stateUpdated];
-    }
+-(void)setActivated:(BOOL)activated
+{
+    _activated = activated;
+    
+    [self stateUpdated];
+}
 
-    -(void)stateUpdated
-    {
-        [self updateInfoLabel];
-    }
+-(void)stateUpdated
+{
+    [self updateInfoLabel];
+}
 
 #pragma mark - Info label
 
@@ -175,6 +175,62 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
         self.infoLabel.attributedText = self.currentInfoAttributedText;
     }
 }
+
+#pragma mark - KVO
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == EPVContextText || context == EPVContextAttributedText) {
+        [self setNeedsLayout];
+    } else if ([super respondsToSelector:_cmd]) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+@end
+
+@implementation EPVActivationButton (RDHBackgroundStates)
+
+
+#pragma mark - Background state
+
+-(void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state
+{
+    NSNumber *key = @(state);
+    UIColor *oldColor = self.backgroundStateColors[key];
+    
+    if (![oldColor isEqual:color]) {
+        
+        UIImage *colorImage = nil;
+        
+        if (color) {
+            // Update
+            self.backgroundStateColors[key] = color;
+            
+            colorImage = [UIImage imageWithColor:color];
+            
+        } else {
+            // Clear
+            [self.backgroundStateColors removeObjectForKey:key];
+        }
+        
+        [self setBackgroundImage:colorImage forState:state];
+    }
+}
+
+-(UIColor *)backgroundColorForState:(UIControlState)state
+{
+    return self.backgroundStateColors[@(state)];
+}
+
+-(UIColor *)currentBackgroundColor
+{
+    return [self backgroundColorForState:self.state];
+}
+
+@end
+
+@implementation EPVActivationButton (RDHInfoStates)
 
 #pragma mark - Info state
 
@@ -244,7 +300,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 {
     NSString *text = [self infoWithKey:RDHStateKeyText forState:state];
     
-    if (!text & (state != UIControlStateNormal)) {
+    if (!text && (state != UIControlStateNormal)) {
         text = [self infoTextForState:UIControlStateNormal];
     }
     
@@ -255,7 +311,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 {
     UIColor *color = [self infoWithKey:RDHStateKeyColor forState:state];
     
-    if (!color & (state != UIControlStateNormal)) {
+    if (!color && (state != UIControlStateNormal)) {
         color = [self infoColorForState:UIControlStateNormal];
     }
     
@@ -266,7 +322,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 {
     UIColor *color = [self infoWithKey:RDHStateKeyShadowColor forState:state];
     
-    if (!color & (state != UIControlStateNormal)) {
+    if (!color && (state != UIControlStateNormal)) {
         color = [self infoShadowColorForState:UIControlStateNormal];
     }
     
@@ -277,7 +333,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 {
     NSAttributedString *text = [self infoWithKey:RDHStateKeyAttributedText forState:state];
     
-    if (!text & (state != UIControlStateNormal)) {
+    if (!text && (state != UIControlStateNormal)) {
         text = [self infoAttributedTextForState:UIControlStateNormal];
     }
     
@@ -302,53 +358,6 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 -(NSAttributedString *)currentInfoAttributedText
 {
     return [self infoAttributedTextForState:self.state];
-}
-
-#pragma mark - Background state
-
--(void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state
-{
-    NSNumber *key = @(state);
-    UIColor *oldColor = self.backgroundStateColors[key];
-    
-    if (![oldColor isEqual:color]) {
-        
-        UIImage *colorImage = nil;
-        
-        if (color) {
-            // Update
-            self.backgroundStateColors[key] = color;
-            
-            colorImage = [UIImage imageWithColor:color];
-            
-        } else {
-            // Clear
-            [self.backgroundStateColors removeObjectForKey:key];
-        }
-        
-        [self setBackgroundImage:colorImage forState:state];
-    }
-}
-
--(UIColor *)backgroundColorForState:(UIControlState)state
-{
-    return self.backgroundStateColors[@(state)];
-}
-
--(UIColor *)currentBackgroundColor
-{
-    return [self backgroundColorForState:self.state];
-}
-
-#pragma mark - KVO
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (context == EPVContextText || context == EPVContextAttributedText) {
-        [self setNeedsLayout];
-    } else if ([super respondsToSelector:_cmd]) {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
 }
 
 @end

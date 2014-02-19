@@ -18,6 +18,24 @@
 /// Displays the title
 @property (nonatomic, weak, readonly) UILabel *infoLabel;
 
+
+@end
+
+@interface EPVActivationButton (RDHBackgroundStates)
+
+#pragma mark - Background state
+/// @name Background state
+
+-(void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;                     // default is transparent black.
+
+-(UIColor *)backgroundColorForState:(UIControlState)state;          // these getters only take a single state value
+
+@property (nonatomic, readonly, strong) UIColor *currentBackgroundColor;  // normal/highlighted/selected/disabled. can return nil
+
+@end
+
+@interface EPVActivationButton (RDHInfoStates)
+
 #pragma mark - Info state
 /// @name Info state
 
@@ -41,14 +59,5 @@
 @property (nonatomic, readonly, strong) UIColor *currentInfoColor;
 @property (nonatomic, readonly, strong) UIColor *currentInfoShadowColor;
 @property (nonatomic, readonly, strong) NSAttributedString *currentInfoAttributedText;
-
-#pragma mark - Background state
-/// @name Background state
-
--(void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;                     // default is transparent black.
-
--(UIColor *)backgroundColorForState:(UIControlState)state;          // these getters only take a single state value
-
-@property (nonatomic, readonly, strong) UIColor *currentBackgroundColor;  // normal/highlighted/selected/disabled. can return nil
 
 @end
