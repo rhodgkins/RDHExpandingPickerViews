@@ -13,6 +13,8 @@
 #import <RDHExpandingPickerViews/EPVDatePickerInputView.h>
 #import <RDHExpandingPickerViews/EPVExpandingPickerView.h>
 
+#import "UIImage+RDHColor.h"
+
 @interface EPVViewController ()<EPVExpandingPickerViewDataSource, EPVExpandingPickerViewDelegate>
 
 @property (nonatomic, weak) EPVDatePickerInputView *countDownPickerInputView;
@@ -35,8 +37,25 @@
         
     EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
-    datePickerInputView.titleLabel.text = @"Title";
-    [datePickerInputView setTitle:@"Title" forState:~(0L)];
+//    datePickerInputView.titleLabel.text = @"Title";
+    //    [datePickerInputView setTitle:@"Title" forState:~(0L)];
+    [datePickerInputView setTitle:@"TitleN" forState:UIControlStateNormal];
+    [datePickerInputView setTitle:@"TitleS" forState:UIControlStateSelected];
+    [datePickerInputView setTitle:@"TitleNH" forState:UIControlStateNormal|UIControlStateHighlighted];
+    [datePickerInputView setTitle:@"TitleSH" forState:UIControlStateSelected|UIControlStateHighlighted];
+    [datePickerInputView setTitle:@"TitleAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected];
+    [datePickerInputView setTitle:@"TitleAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal];
+    [datePickerInputView setTitle:@"TitleA" forState:RDHControlStateActivated];
+    [datePickerInputView setTitle:@"TitleAS" forState:RDHControlStateActivated|UIControlStateSelected];
+    
+    [datePickerInputView setTitle:@"TitleDN" forState:UIControlStateNormal | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDS" forState:UIControlStateSelected | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDNH" forState:UIControlStateNormal|UIControlStateHighlighted | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDSH" forState:UIControlStateSelected|UIControlStateHighlighted | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDA" forState:RDHControlStateActivated | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAS" forState:RDHControlStateActivated|UIControlStateSelected | UIControlStateDisabled];
     datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
     datePickerInputView.placeholderValue = @"Date";
 //    datePickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
@@ -46,6 +65,7 @@
 //    datePickerInputView.displayExpandedBackgroundColor = [UIColor redColor];
 //    datePickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor lightGrayColor];
     [datePickerInputView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
+    [datePickerInputView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
     [self.view addSubview:datePickerInputView];
     self.datePickerInputView = datePickerInputView;
     
@@ -67,10 +87,11 @@
 //    countDownPickerInputView.displayExpandedBackgroundColor = [UIColor grayColor];
 //    countDownPickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor magentaColor];
     [countDownPickerInputView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
+    [countDownPickerInputView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
     [self.view addSubview:countDownPickerInputView];
     self.countDownPickerInputView = countDownPickerInputView;
     
-    [countDownPickerInputView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:datePickerInputView inset:40];
+    [countDownPickerInputView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:datePickerInputView inset:20];
     [countDownPickerInputView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
     
     
@@ -79,15 +100,16 @@
     expandingPickerView.placeholderValue = @"Picker";
 //    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
 //    expandingPickerView.displayHighlightedBackgroundColor = [UIColor orangeColor];
-    expandingPickerView.dataSource = self;
+//    expandingPickerView.dataSource = self;
     expandingPickerView.delegate = self;
     expandingPickerView.selectedObject = nil;
     [expandingPickerView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
+    [expandingPickerView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
     
     [self.view addSubview:expandingPickerView];
     self.expandingPickerView = expandingPickerView;
     
-    [expandingPickerView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:countDownPickerInputView inset:40];
+    [expandingPickerView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:countDownPickerInputView inset:20];
     [expandingPickerView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
     [expandingPickerView pinEdge:NSLayoutAttributeBottom toEdge:NSLayoutAttributeBottom ofItem:self.bottomLayoutGuide];
     
@@ -101,12 +123,29 @@
     });
     
     self.pickerItems = @[@"A", @"B", @"C", @"D", @"E"];
+    
+//    UIButton *b = [UIButton autoLayoutView];
+//    [b setTitle:@"TITLE" forState:UIControlStateNormal];
+//    [b setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [b setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+//    [b addTarget:self action:@selector(numberOfComponentsInExpandingPickerView:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.view addSubview:b];
+//    [b pinToSuperviewEdges:JRTViewPinAllEdges inset:10];
 }
 
 -(void)editingDidBeingForExpandingPickerView:(EPVBaseContainerInputView *)expandingPickerView
 {
     CGRect rect = [self.view convertRect:expandingPickerView.bounds fromView:expandingPickerView];
     [self.view scrollRectToVisible:rect animated:YES];
+}
+
+-(void)editingDidEndForExpandingPickerView:(EPVBaseContainerInputView *)expandingPickerView
+{
+//    CGRect rect = [self.view convertRect:expandingPickerView.bounds fromView:expandingPickerView];
+//    [self.view scrollRectToVisible:rect animated:YES];
+    
+//    expandingPickerView.enabled = NO;
 }
 
 #pragma mark - Expanding picker view data source
