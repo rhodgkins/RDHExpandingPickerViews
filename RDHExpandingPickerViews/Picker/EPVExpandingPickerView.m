@@ -101,7 +101,7 @@
                 [self.pickerView selectRow:[row integerValue] inComponent:component animated:animated];
             }];
         } else {
-            [self setSelectedObject:self.initiallySelectedObject animated:animated];
+            
         }
     }
 }
@@ -154,19 +154,35 @@
     }
 }
 
+-(void)setEnabled:(BOOL)enabled
+{
+    super.enabled = enabled;
+    
+    [self updateEnabled];
+    
+    if (self.enabled != enabled) {
+        NSLog(@"You're trying to change the enabled state on this object when disabledWhenEmpty is set to YES, set this to NO for %@ to get rid of this warning", [self description]);
+    }
+}
+
 -(void)updateEnabled
 {
-    BOOL enabled = NO;
+    BOOL enabled = self.enabled;
     
-    for (NSUInteger component = 0; component < [self.pickerView numberOfComponents]; component++) {
+    if (self.disabledWhenEmpty) {
+        enabled = NO;
         
-        if ([self.pickerView numberOfRowsInComponent:component] > 0) {
-            // Found that we've got selectable data
-            enabled = YES;
-            break;
+        for (NSUInteger component = 0; component < [self.pickerView numberOfComponents]; component++) {
+            
+            if ([self.pickerView numberOfRowsInComponent:component] > 0) {
+                // Found that we've got selectable data
+                enabled = YES;
+                break;
+            }
         }
     }
-    self.enabled = enabled;
+    
+    super.enabled = enabled;
 }
 
 #pragma mark - UIPickerView data source
