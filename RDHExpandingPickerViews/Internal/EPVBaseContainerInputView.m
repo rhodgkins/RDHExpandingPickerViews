@@ -22,10 +22,9 @@
 /// Gray - 8 bit [0, 255]
 #define UIColorWithGray(GRAY) (UIColorWithGrayAlpha((GRAY), 1.0))
 
-const UIControlState RDHControlStateActivated = UIControlStateApplication;
+const CGFloat RDHStandardDisabledAlpha = 0.26667;
 
-// For readability
-static UIControlState RDHControlStatePlaceholder = UIControlStateNormal;
+const UIControlState RDHControlStateActivated = UIControlStateApplication;
 
 const EPVPickerViewHeight EPVPickerViewHeightShortest = 162.0;
 const EPVPickerViewHeight EPVPickerViewHeightStandard = 180.0;
@@ -297,34 +296,39 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     }
 }
 
++(NSArray *)selectedStates
+{
+    static NSArray *states;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSArray *enabledStates = @[@(RDHControlStateActivated | UIControlStateSelected),
+                   @(UIControlStateSelected),
+                   @(UIControlStateSelected | UIControlStateHighlighted),
+                   @(RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted)];
+        
+        // Copy and add disabled states
+        NSMutableArray *allStates = [enabledStates mutableCopy];
+        [allStates addObject:@(UIControlStateDisabled)];
+        for (NSNumber *enabledState in enabledStates) {
+            [allStates addObject:@([enabledState unsignedIntegerValue] | UIControlStateDisabled)];
+        }
+        states = [allStates copy];
+    });
+    return states;
+}
+
 -(void)setSelectedValue:(NSString *)text
 {
-    [self.button setTitle:text forState:RDHControlStateActivated | UIControlStateSelected];
-    [self.button setTitle:text forState:UIControlStateSelected];
-    [self.button setTitle:text forState:UIControlStateSelected | UIControlStateHighlighted];
-    [self.button setTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted];
-    
-    // Disabled states
-    [self.button setTitle:text forState:UIControlStateDisabled];
-    [self.button setTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateDisabled];
-    [self.button setTitle:text forState:UIControlStateSelected | UIControlStateDisabled];
-    [self.button setTitle:text forState:UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
-    [self.button setTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
+    for (NSNumber *state in [[self class] selectedStates]) {
+        [self.button setTitle:text forState:[state unsignedIntegerValue]];
+    }
 }
 
 -(void)setSelectedAttributedValue:(NSAttributedString *)text
 {
-    [self.button setAttributedTitle:text forState:RDHControlStateActivated | UIControlStateSelected];
-    [self.button setAttributedTitle:text forState:UIControlStateSelected];
-    [self.button setAttributedTitle:text forState:UIControlStateSelected | UIControlStateHighlighted];
-    [self.button setAttributedTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted];
-    
-    // Disabled states
-    [self.button setAttributedTitle:text forState:UIControlStateDisabled];
-    [self.button setAttributedTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateDisabled];
-    [self.button setAttributedTitle:text forState:UIControlStateSelected | UIControlStateDisabled];
-    [self.button setAttributedTitle:text forState:UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
-    [self.button setAttributedTitle:text forState:RDHControlStateActivated | UIControlStateSelected | UIControlStateHighlighted | UIControlStateDisabled];
+    for (NSNumber *state in [[self class] selectedStates]) {
+        [self.button setAttributedTitle:text forState:[state unsignedIntegerValue]];
+    }
 }
 
 #pragma mark - Picker animation
@@ -487,14 +491,13 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     static UIColor *color;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        color = UIColorWithGrayAlpha(48, 0.33);
+        color = UIColorWithGrayAlpha(0, RDHStandardDisabledAlpha);
     });
     return color;
 }
 
 @end
 
-///
 @implementation EPVBaseContainerInputView (RDHStateDisplay)
 
 #pragma mark - Label background color
@@ -593,43 +596,76 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 #pragma mark - Value display
 
--(NSString *)placeholderValue
++(NSArray *)placeholderStates
 {
-    return [self.button titleForState:RDHControlStatePlaceholder];
+    static NSArray *states;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        states = @[@(UIControlStateNormal),
+                   @(UIControlStateNormal | RDHControlStateActivated),
+                   @(UIControlStateNormal | UIControlStateHighlighted),
+                   @(UIControlStateNormal | UIControlStateHighlighted | RDHControlStateActivated)];
+    });
+    return states;
 }
 
--(void)setPlaceholderValue:(NSString *)placeholderValue
++(NSArray *)placeholderDisabledStates
 {
-    [self.button setTitle:placeholderValue forState:RDHControlStatePlaceholder];
-    [self.button setTitle:placeholderValue forState:RDHControlStatePlaceholder | RDHControlStateActivated];
-    [self.button setTitle:placeholderValue forState:RDHControlStatePlaceholder | UIControlStateHighlighted];
-    [self.button setTitle:placeholderValue forState:RDHControlStatePlaceholder | UIControlStateHighlighted | RDHControlStateActivated];
+    static NSArray *states;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        states = @[@(UIControlStateNormal | UIControlStateDisabled),
+                   @(UIControlStateNormal | RDHControlStateActivated | UIControlStateDisabled),
+                   @(UIControlStateNormal | UIControlStateHighlighted | UIControlStateDisabled),
+                   @(UIControlStateNormal | UIControlStateHighlighted | RDHControlStateActivated | UIControlStateDisabled)];
+    });
+    return states;
+}
+
+-(NSString *)placeholderValue
+{
+    return [self.button titleForState:[[[[self class] placeholderStates] firstObject] unsignedIntegerValue]];
+}
+
+-(void)setPlaceholderValue:(NSString *)text
+{
+    for (NSNumber *state in [[self class] placeholderStates]) {
+        [self.button setTitle:text forState:[state unsignedIntegerValue]];
+    }
+    for (NSNumber *state in [[self class] placeholderDisabledStates]) {
+        [self.button setTitle:text forState:[state unsignedIntegerValue]];
+    }
 }
 
 -(NSAttributedString *)attributedPlaceholderValue
 {
-    return [self.button attributedTitleForState:RDHControlStatePlaceholder];
+    return [self.button attributedTitleForState:[[[[self class] placeholderStates] firstObject] unsignedIntegerValue]];
 }
 
--(void)setAttributedPlaceholderValue:(NSAttributedString *)attributedPlaceholderValue
+-(void)setAttributedPlaceholderValue:(NSAttributedString *)text
 {
-    [self.button setAttributedTitle:attributedPlaceholderValue forState:RDHControlStatePlaceholder];
-    [self.button setAttributedTitle:attributedPlaceholderValue forState:RDHControlStatePlaceholder | RDHControlStateActivated];
-    [self.button setAttributedTitle:attributedPlaceholderValue forState:RDHControlStatePlaceholder | UIControlStateHighlighted];
-    [self.button setAttributedTitle:attributedPlaceholderValue forState:RDHControlStatePlaceholder | UIControlStateHighlighted | RDHControlStateActivated];
+    for (NSNumber *state in [[self class] placeholderStates]) {
+        [self.button setAttributedTitle:text forState:[state unsignedIntegerValue]];
+    }
+    for (NSNumber *state in [[self class] placeholderDisabledStates]) {
+        [self.button setAttributedTitle:text forState:[state unsignedIntegerValue]];
+    }
 }
 
 -(UIColor *)placeholderValueColor
 {
-    return [self.button titleColorForState:RDHControlStatePlaceholder];
+    return [self valueColorForState:[[[[self class] placeholderStates] firstObject] unsignedIntegerValue]];
 }
 
 -(void)setPlaceholderValueColor:(UIColor *)color
 {
-    [self setValueColor:color forState:RDHControlStatePlaceholder];
-    [self setValueColor:color forState:RDHControlStatePlaceholder | RDHControlStateActivated];
-    [self setValueColor:color forState:RDHControlStatePlaceholder | UIControlStateHighlighted];
-    [self setValueColor:color forState:RDHControlStatePlaceholder | UIControlStateHighlighted | RDHControlStateActivated];
+    for (NSNumber *state in [[self class] placeholderStates]) {
+        [self setValueColor:color forState:[state unsignedIntegerValue]];
+    }
+    UIColor *disabledColor = [color colorWithAlphaComponent:RDHStandardDisabledAlpha];
+    for (NSNumber *state in [[self class] placeholderDisabledStates]) {
+        [self setValueColor:disabledColor forState:[state unsignedIntegerValue]];
+    }
 }
 
 -(UIFont *)valueFont
