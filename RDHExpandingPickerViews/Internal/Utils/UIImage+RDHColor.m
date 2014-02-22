@@ -54,7 +54,7 @@
     
     UIGraphicsEndImageContext();
     
-    return [image resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    return [image resizableImageWithCapInsets:UIEdgeInsetsZero];
 }
 
 @end
