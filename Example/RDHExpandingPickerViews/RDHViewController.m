@@ -37,10 +37,10 @@
         
     RDHExpandingDatePickerView *datePickerInputView = [RDHExpandingDatePickerView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
-    [self setup:datePickerInputView];
+//    [self setup:datePickerInputView];
 //    datePickerInputView.titleLabel.text = @"Title";
     //    [datePickerInputView setTitle:@"Title" forState:~(0L)];
-    datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
+    datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 2, 10);
     datePickerInputView.placeholderValue = @"Date";
 //    datePickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
 //    datePickerInputView.expandedValueTextColor = [UIColor purpleColor];
@@ -58,12 +58,12 @@
  
     
     RDHExpandingDatePickerView *countDownPickerInputView = [RDHExpandingDatePickerView autoLayoutView];
-    [self setup:countDownPickerInputView];
+//    [self setup:countDownPickerInputView];
     countDownPickerInputView.pickerView.datePickerMode = UIDatePickerModeCountDownTimer;
 //    countDownPickerInputView.selectedTimeInterval = 2213;
 //    countDownPickerInputView.pickerView.minuteInterval = 5;
-    countDownPickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
-    countDownPickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
+//    countDownPickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
+    countDownPickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 2, 10);
     countDownPickerInputView.placeholderValue = @"Count Down";
 //    countDownPickerInputView.expandedValueTextColor = [UIColor purpleColor];
 //    countDownPickerInputView.displayBackgroundColor = [UIColor redColor];
@@ -81,7 +81,7 @@
     
     RDHExpandingPickerView *expandingPickerView = [RDHExpandingPickerView autoLayoutView];
     expandingPickerView.placeholderValue = @"Picker";
-    [self setup:expandingPickerView];
+//    [self setup:expandingPickerView];
 //    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
 //    expandingPickerView.displayHighlightedBackgroundColor = [UIColor orangeColor];
     expandingPickerView.dataSource = self;
@@ -89,7 +89,7 @@
     expandingPickerView.selectedObject = nil;
     [expandingPickerView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [expandingPickerView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
-    expandingPickerView.placeholderValueColor = [UIColor blueColor];
+//    expandingPickerView.placeholderValueColor = [UIColor blueColor];
     
     [self.view addSubview:expandingPickerView];
     self.expandingPickerView = expandingPickerView;
@@ -107,7 +107,16 @@
 //        self.datePickerInputView.displayHeight = 100;
     });
     
-    self.pickerItems = @[@"A", @"B", @"C", @"D", @"E"];
+    self.pickerItems = @[@"One", @"Two", @"Three", @"Four", @""];
+    
+    NSMutableArray *pickerItems = [NSMutableArray arrayWithCapacity:20];
+    
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle:NSNumberFormatterSpellOutStyle];
+    for (NSUInteger i=0; i<20; i++) {
+        [pickerItems addObject:[formatter stringFromNumber:@(i)]];
+    }
+    self.pickerItems = pickerItems;
     
 //    UIButton *b = [UIButton autoLayoutView];
 //    [b setTitle:@"TITLE" forState:UIControlStateNormal];
@@ -117,6 +126,14 @@
 //    
 //    [self.view addSubview:b];
 //    [b pinToSuperviewEdges:JRTViewPinAllEdges inset:10];
+    
+    [datePickerInputView setTitle:@"Date Picker" forState:UIControlStateNormal];
+    [countDownPickerInputView setTitle:@"Count Down Picker" forState:UIControlStateNormal];
+    [expandingPickerView setTitle:@"Picker" forState:UIControlStateNormal];
+    
+    datePickerInputView.placeholderValue = @"Date";
+    countDownPickerInputView.placeholderValue = @"Time";
+    expandingPickerView.placeholderValue = @"Item";
 }
 
 -(void)setup:(_RDHBaseExpandingPickerContainerView *)datePickerInputView
@@ -175,7 +192,7 @@
 
 -(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
 {
-    return [NSString stringWithFormat:@"%@%@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
+    return [NSString stringWithFormat:@"%@ - %@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
 }
 
 -(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
