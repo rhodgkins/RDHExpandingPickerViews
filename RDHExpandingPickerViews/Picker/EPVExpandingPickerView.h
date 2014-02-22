@@ -16,12 +16,12 @@
 /// @name Data source
 
 /// Data source
-@property (nonatomic, weak) id<EPVExpandingPickerViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<EPVExpandingPickerViewDataSource> dataSource;
 
 /// @name Delegate
 
 /// Delegate
-@property (nonatomic, weak) id<EPVExpandingPickerViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<EPVExpandingPickerViewDelegate> delegate;
 
 /// @name Data methods
 
