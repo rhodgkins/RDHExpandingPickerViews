@@ -1,4 +1,4 @@
 RDHExpandingPickerViews
 =======================
 
-Inline view that expands to show a UIPickerView/UIDatePickerView
+Inline view that expands to show a `UIPickerView`/`UIDatePickerView`
