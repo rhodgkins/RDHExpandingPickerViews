@@ -45,13 +45,13 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
     if (context == RDHContextDate) {
         
         self.selectedDate = self.pickerView.date;
-    
+        
     } else if (context == RDHContextCountDownInterval) {
         
         self.selectedTimeInterval = self.pickerView.countDownDuration;
-    
+        
     } else if (context == RDHContextDatePickerMode) {
-
+        
         if (self.selectedObject) {
             self.selectedObject = self.initiallySelectedObject;
         }
@@ -72,15 +72,29 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
     return datePicker;
 }
 
--(NSString *)displayValueForSelectedObject
+#pragma mark - Optional subclass methods
+
+-(id)initiallySelectedObject
+{
+    if ([self isCountDownTimer]) {
+        return @(self.pickerView.countDownDuration);
+    } else {
+        return self.pickerView.date;
+    }
+}
+
+-(NSString *)defaultDisplayValueForSelectedObject
 {
     NSString *value = nil;
-    if (self.selectedObject) {
+    
+    if ([self isCountDownTimer]) {
         
-        if ([self isCountDownTimer]) {
-            
-            // Use the time since reference date to display as this will be formatted correctly and the maximum countdown time is 23:59
-            value = [[[self class] countDownDateFormatter] stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:self.selectedTimeInterval]];
+        // Use the time since reference date to display as this will be formatted correctly and the maximum countdown time is 23:59
+        value = [[[self class] countDownDateFormatter] stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:self.selectedTimeInterval]];
+    } else {
+        
+        if (self.dateFormatter) {
+            value = [self.dateFormatter stringFromDate:self.selectedDate];
         } else {
             // Pick date style based on picker mode
             NSDateFormatterStyle dateStyle = (self.pickerView.datePickerMode == UIDatePickerModeDate || self.pickerView.datePickerMode == UIDatePickerModeDateAndTime) ? NSDateFormatterLongStyle : NSDateFormatterNoStyle;
@@ -92,17 +106,11 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
             value = [NSDateFormatter localizedStringFromDate:self.selectedDate dateStyle:dateStyle timeStyle:timeStyle];
         }
     }
+    
     return value;
 }
 
--(id)initiallySelectedObject
-{
-    if ([self isCountDownTimer]) {
-        return @(self.pickerView.countDownDuration);
-    } else {
-        return self.pickerView.date;
-    }
-}
+#pragma mark - Class specific methods
 
 -(BOOL)isCountDownTimer
 {

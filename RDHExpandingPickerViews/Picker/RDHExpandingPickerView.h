@@ -50,6 +50,13 @@
 /// @see selectedObject
 -(void)setSelectedObject:(NSArray *)selectedObject animated:(BOOL)animated;
 
+#pragma mark - Display blocks
+/// @name Display blocks
+
+@property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
+
+@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
+
 @end
 
 /// Defines data values for the expanding picker view.
@@ -77,28 +84,7 @@
 /// Defines actions and views for the expanding picker view.
 @protocol RDHExpandingPickerViewDelegate <NSObject>
 
-@required
-#pragma mark - Value display methods
-/// @name Value display methods
-
-/**
- * @param expandingPickerView The expanding picker view requesting the display value.
- * @param selectedObject see `-[RDHExpandingPickerView selectedObject]`.
- *
- * @return The value to display in the `-[RDHBaseContainerInputView valueLabel]`.
- */
--(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject;
-
 @optional
-
-/**
- * @param expandingPickerView The expanding picker view requesting the attributed display value.
- * @param selectedObject see `-[RDHExpandingPickerView selectedObject]`.
- *
- * @return The attributed value to display in the `-[RDHBaseContainerInputView valueLabel]`.
- */
--(NSAttributedString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView attributedDisplayValueForSelectedObject:(NSArray *)selectedObject;
-
 #pragma mark - Sizing methods
 /// @name Sizing methods
 

@@ -43,20 +43,6 @@
     return pickerView;
 }
 
--(NSArray *)initiallySelectedObject
-{
-    return [NSArray arrayFilledWithCount:[self numberOfComponents] ofObject:@(0)];
-}
-
--(NSString *)displayValueForSelectedObject
-{
-    NSString *value = nil;
-    if (self.selectedObject) {
-        value = [self.delegate expandingPickerView:self displayValueForSelectedObject:self.selectedObject];
-    }
-    return value;
-}
-
 #pragma mark - Overriden super class methods
 
 -(void)commonInit
@@ -70,15 +56,21 @@
     [self updateEnabled];
 }
 
--(NSAttributedString *)attributedDisplayValueForSelectedObject
+-(NSArray *)initiallySelectedObject
 {
-    NSAttributedString *value = [super attributedDisplayValueForSelectedObject];
-    if ([self.delegate respondsToSelector:@selector(expandingPickerView:attributedDisplayValueForSelectedObject:)]) {
-        if (self.selectedObject) {
-            value = [self.delegate expandingPickerView:self attributedDisplayValueForSelectedObject:self.selectedObject];
-        }
-    }
-    return value;
+    return [NSArray arrayFilledWithCount:[self numberOfComponents] ofObject:@(0)];
+}
+
+-(NSString *)defaultDisplayValueForSelectedObject
+{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self.selectedObject count]];
+    [self.selectedObject enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        
+        NSString *title = [self.delegate expandingPickerView:self titleForRow:[obj unsignedIntegerValue] forComponent:idx];
+        
+        [array addObject:title];
+    }];
+    return [array componentsJoinedByString:@", "];
 }
 
 #pragma mark - Object selection

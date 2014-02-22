@@ -26,12 +26,16 @@
 /// @returns The backing picker view.
 -(UIView *)createPickerView;
 
--(NSString *)displayValueForSelectedObject;
-
 #pragma mark - Optional subclass methods
 
-/// @returns Default implemention returns `nil`.
--(NSAttributedString *)attributedDisplayValueForSelectedObject;
+/// @returns Default implementation returns `nil`.
+-(id)initiallySelectedObject;
+
+/// @returns Default implementation uses the `displayValueBlock`.
+-(NSString *)defaultDisplayValueForSelectedObject;
+
+/// @returns Default implemention returns `nil` if there is no `attriburedDisplayValueBlock` set.
+-(NSAttributedString *)defaultAttributedDisplayValueForSelectedObject;
 
 #pragma mark - Object selection
 
@@ -48,5 +52,11 @@
 
 /// Inital object for `selectedObject`.
 @property (nonatomic, weak, readonly) id initiallySelectedObject;
+
+#pragma mark - Display blocks
+
+@property (nonatomic, copy) NSString*(^displayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
+
+@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
 
 @end

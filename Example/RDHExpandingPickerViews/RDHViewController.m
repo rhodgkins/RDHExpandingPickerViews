@@ -42,6 +42,8 @@
     //    [datePickerInputView setTitle:@"Title" forState:~(0L)];
     datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 2, 10);
     datePickerInputView.placeholderValue = @"Date";
+//    datePickerInputView.dateFormatter = [NSDateFormatter new];
+//    [datePickerInputView.dateFormatter setDateFormat:@"HH:mm yyyy"];
 //    datePickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
 //    datePickerInputView.expandedValueTextColor = [UIColor purpleColor];
 //    datePickerInputView.displayBackgroundColor = [UIColor whiteColor];
@@ -87,6 +89,10 @@
     expandingPickerView.dataSource = self;
     expandingPickerView.delegate = self;
     expandingPickerView.selectedObject = nil;
+//    expandingPickerView.displayValueBlock = ^NSString *(RDHExpandingPickerView *view, NSArray *selectedObject) {
+//        
+//        return [NSString stringWithFormat:@"%@ - %@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
+//    };
     [expandingPickerView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [expandingPickerView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
 //    expandingPickerView.placeholderValueColor = [UIColor blueColor];
@@ -132,7 +138,7 @@
     [expandingPickerView setTitle:@"Picker" forState:UIControlStateNormal];
     
     datePickerInputView.placeholderValue = @"Date";
-    countDownPickerInputView.placeholderValue = @"Time";
+    countDownPickerInputView.placeholderValue = @"Timer";
     expandingPickerView.placeholderValue = @"Item";
 }
 
@@ -189,11 +195,6 @@
 }
 
 #pragma mark - Expanding picker view delegate
-
--(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
-{
-    return [NSString stringWithFormat:@"%@ - %@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
-}
 
 -(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
 {

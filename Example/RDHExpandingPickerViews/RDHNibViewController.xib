@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RDHNibViewController">
             <connections>
+                <outlet property="expandingPickerView" destination="Brz-h0-2eT" id="SbI-cK-wK9"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

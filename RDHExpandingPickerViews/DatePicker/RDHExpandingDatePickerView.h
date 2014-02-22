@@ -32,4 +32,17 @@
 /// @see selectedTimeInterval
 -(void)setSelectedTimeInterval:(NSTimeInterval)selectedTimeInterval animated:(BOOL)animated;
 
+#pragma mark - Date display
+/// @name Date display
+
+/// This will be used to display the `selectedObject` date when the `pickerView` is **not** in `UIDatePickerModeCountDownTimer` mode.
+@property (nonatomic, copy) NSDateFormatter *dateFormatter;
+
+#pragma mark - Display blocks
+/// @name Display blocks
+
+@property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingDatePickerView *expandingPickerView, NSDate *selectedObject);
+
+@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingDatePickerView *expandingPickerView, NSDate *selectedObject);
+
 @end

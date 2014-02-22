@@ -434,21 +434,45 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a view", NSStringFromSelector(_cmd)] userInfo:nil];
 }
 
--(NSString *)displayValueForSelectedObject
-{
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a subclass returning a string", NSStringFromSelector(_cmd)] userInfo:nil];
-}
-
 #pragma mark - Optional subclass methods
-
--(NSAttributedString *)attributedDisplayValueForSelectedObject
-{
-    return nil;
-}
 
 -(id)initiallySelectedObject
 {
     return nil;
+}
+
+-(NSString *)defaultDisplayValueForSelectedObject
+{
+    return [self.selectedObject description];
+}
+
+-(NSAttributedString *)defaultAttributedDisplayValueForSelectedObject
+{
+    return nil;
+}
+
+#pragma mark - Display methods
+
+-(NSString *)displayValueForSelectedObject
+{
+    NSAssert(self.selectedObject, @"Asking for a display value when there is no selected object");
+    
+    if (self.displayValueBlock) {
+        return self.displayValueBlock(self, self.selectedObject);
+    } else {
+        return [self defaultDisplayValueForSelectedObject];
+    }
+}
+
+-(NSAttributedString *)attributedDisplayValueForSelectedObject
+{
+    NSAssert(self.selectedObject, @"Asking for an attributed display value when there is no selected object");
+    
+    if (self.attriburedDisplayValueBlock) {
+        return self.attriburedDisplayValueBlock(self, self.selectedObject);
+    } else {
+        return [self defaultAttributedDisplayValueForSelectedObject];
+    }
 }
 
 #pragma mark - Colors

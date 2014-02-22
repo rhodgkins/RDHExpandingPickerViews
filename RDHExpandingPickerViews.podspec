@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'RDHExpandingPickerViews'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.license = 'MIT'
   
   s.summary = 'Inline view that expands to show a UIPickerView/UIDatePickerView.'
