@@ -1,49 +1,42 @@
 //
-//  EPVBaseContainerInputView.m
+//  _RDHBaseExpandingPickerContainerView.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVBaseContainerInputView.h"
-#import "EPVBaseContainerInputView_EPVInternal.h"
+#import "_RDHBaseExpandingPickerContainerView.h"
+#import "_RDHBaseExpandingPickerContainerView_RDHInternal.h"
 
 #import "UIImage+RDHColor.h"
 
-#import "EPVActivationButton.h"
+#import "RDHColorUtils.h"
 
-/// RGB - 8 bit [0, 255], A - float, [0,1]
-#define UIColorWithRGBA(R, G, B, A) ([UIColor colorWithRed:((R)/255.0) green:((G)/255.0) blue:((B)/255.0) alpha:(A)])
-/// RGB - 8 bit [0, 255]
-#define UIColorWithRGB(R, G, B) (UIColorWithRGBA((R), (G), (B), 1.0))
-/// Gray - 8 bit [0, 255], A - float, [0,1]
-#define UIColorWithGrayAlpha(GRAY, A) ([UIColor colorWithWhite:((GRAY)/255.0) alpha:(A)])
-/// Gray - 8 bit [0, 255]
-#define UIColorWithGray(GRAY) (UIColorWithGrayAlpha((GRAY), 1.0))
+#import "RDHActivationButton.h"
 
 const CGFloat RDHStandardDisabledAlpha = 0.26667;
 
 const UIControlState RDHControlStateActivated = UIControlStateApplication;
 
-const EPVPickerViewHeight EPVPickerViewHeightShortest = 162.0;
-const EPVPickerViewHeight EPVPickerViewHeightStandard = 180.0;
-const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
+const RDHPickerViewHeight RDHPickerViewHeightShortest = 162.0;
+const RDHPickerViewHeight RDHPickerViewHeightStandard = 180.0;
+const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
 
-@interface EPVBaseContainerInputView ()
+@interface _RDHBaseExpandingPickerContainerView ()
 {
 @private
     BOOL subclassInstantiation;
 }
 
 /// Button that activates the view.
-@property (nonatomic, weak, readonly) EPVActivationButton *button;
+@property (nonatomic, weak, readonly) RDHActivationButton *button;
 
 @property (nonatomic, weak, readonly) NSLayoutConstraint *heightConstraint;
 
 @end
 
-@implementation EPVBaseContainerInputView
+@implementation _RDHBaseExpandingPickerContainerView
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -84,14 +77,14 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     [self addTarget:self action:@selector(didTapActivationButton) forControlEvents:UIControlEventTouchUpInside];
     
     _displayHeight = 34;
-    _pickerViewHeight = EPVPickerViewHeightStandard;
+    _pickerViewHeight = RDHPickerViewHeightStandard;
     
     self.labelEdgeInsets = UIEdgeInsetsZero;
     
     [self setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
     [self setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
     
-    EPVActivationButton *button = [EPVActivationButton buttonWithType:UIButtonTypeCustom];
+    RDHActivationButton *button = [RDHActivationButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     [self addSubview:button];
     _button = button;
@@ -197,7 +190,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     }
 }
 
--(void)setPickerViewHeight:(EPVPickerViewHeight)pickerViewHeight
+-(void)setPickerViewHeight:(RDHPickerViewHeight)pickerViewHeight
 {
     if (_pickerViewHeight != pickerViewHeight) {
         _pickerViewHeight = pickerViewHeight;
@@ -502,7 +495,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 @end
 
-@implementation EPVBaseContainerInputView (RDHStateDisplay)
+@implementation _RDHBaseExpandingPickerContainerView (RDHStateDisplay)
 
 #pragma mark - Label background color
 
@@ -719,7 +712,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 @end
 
-@implementation EPVBaseContainerInputView (RDHPickerDisplay)
+@implementation _RDHBaseExpandingPickerContainerView (RDHPickerDisplay)
 
 
 -(UIColor *)pickerViewBackgroundColor

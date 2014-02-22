@@ -1,31 +1,31 @@
 //
-//  EPVDatePickerInputView.m
+//  RDHExpandingDatePickerView.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVDatePickerInputView.h"
-#import "EPVBaseContainerInputView_EPVInternal.h"
+#import "RDHExpandingDatePickerView.h"
+#import "_RDHBaseExpandingPickerContainerView_RDHInternal.h"
 
-#import "EPVDatePicker.h"
+#import "RDHDatePicker.h"
 
-static void *EPVContextDate = &EPVContextDate;
-static void *EPVContextCountDownInterval = &EPVContextCountDownInterval;
-static void *EPVContextDatePickerMode = &EPVContextDatePickerMode;
+static void *RDHContextDate = &RDHContextDate;
+static void *RDHContextCountDownInterval = &RDHContextCountDownInterval;
+static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
-@interface EPVDatePickerInputView ()
+@interface RDHExpandingDatePickerView ()
 
 @end
 
-@implementation EPVDatePickerInputView
+@implementation RDHExpandingDatePickerView
 
 -(void)dealloc
 {
-    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(date)) context:EPVContextDate];
-    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(countDownDuration)) context:EPVContextCountDownInterval];
-    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(datePickerMode)) context:EPVContextDatePickerMode];
+    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(date)) context:RDHContextDate];
+    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(countDownDuration)) context:RDHContextCountDownInterval];
+    [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(datePickerMode)) context:RDHContextDatePickerMode];
 }
 
 -(void)commonInit
@@ -35,22 +35,22 @@ static void *EPVContextDatePickerMode = &EPVContextDatePickerMode;
     [super commonInit];
     
     // Observer after so we don't get any calls when initially setting the selected object.
-    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(date)) options:NSKeyValueObservingOptionNew context:EPVContextDate];
-    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(countDownDuration)) options:NSKeyValueObservingOptionNew context:EPVContextCountDownInterval];
-    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(datePickerMode)) options:0 context:EPVContextDatePickerMode];
+    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(date)) options:NSKeyValueObservingOptionNew context:RDHContextDate];
+    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(countDownDuration)) options:NSKeyValueObservingOptionNew context:RDHContextCountDownInterval];
+    [self.pickerView addObserver:self forKeyPath:NSStringFromSelector(@selector(datePickerMode)) options:0 context:RDHContextDatePickerMode];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == EPVContextDate) {
+    if (context == RDHContextDate) {
         
         self.selectedDate = self.pickerView.date;
     
-    } else if (context == EPVContextCountDownInterval) {
+    } else if (context == RDHContextCountDownInterval) {
         
         self.selectedTimeInterval = self.pickerView.countDownDuration;
     
-    } else if (context == EPVContextDatePickerMode) {
+    } else if (context == RDHContextDatePickerMode) {
 
         if (self.selectedObject) {
             self.selectedObject = self.initiallySelectedObject;
@@ -66,7 +66,7 @@ static void *EPVContextDatePickerMode = &EPVContextDatePickerMode;
 
 -(UIView *)createPickerView
 {
-    UIDatePicker *datePicker = [EPVDatePicker new];
+    UIDatePicker *datePicker = [RDHDatePicker new];
     [datePicker addTarget:self action:@selector(didChangeValue) forControlEvents:UIControlEventValueChanged];
     
     return datePicker;

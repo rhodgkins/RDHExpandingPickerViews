@@ -1,22 +1,22 @@
 //
-//  EPVNibViewController.m
+//  RDHNibViewController.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 22/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVNibViewController.h"
+#import "RDHNibViewController.h"
 
-#import <RDHExpandingPickerViews/EPVExpandingPickerView.h>
+#import <RDHExpandingPickerViews/RDHExpandingPickerView.h>
 
-@interface EPVNibViewController ()
+@interface RDHNibViewController ()
 
 @property (nonatomic, copy) NSArray *pickerItems;
 
 @end
 
-@implementation EPVNibViewController
+@implementation RDHNibViewController
 
 -(instancetype)init
 {
@@ -43,12 +43,12 @@
 }
 #pragma mark - Expanding picker view data source
 
--(NSUInteger)numberOfComponentsInExpandingPickerView:(EPVExpandingPickerView *)expandingPickerView
+-(NSUInteger)numberOfComponentsInExpandingPickerView:(RDHExpandingPickerView *)expandingPickerView
 {
     return 2;
 }
 
--(NSUInteger)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component
+-(NSUInteger)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component
 {
     if (component == 0) {
         // Letters
@@ -60,12 +60,12 @@
 
 #pragma mark - Expanding picker view delegate
 
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
 {
     return [NSString stringWithFormat:@"%@%@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
 }
 
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
 {
     if (component == 0) {
         return self.pickerItems[row];

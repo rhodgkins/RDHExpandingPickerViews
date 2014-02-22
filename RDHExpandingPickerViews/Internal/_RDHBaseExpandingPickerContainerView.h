@@ -1,5 +1,5 @@
 //
-//  EPVBaseContainerInputView.h
+//  _RDHBaseExpandingPickerContainerView.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
@@ -14,14 +14,14 @@ UIKIT_EXTERN const UIControlState RDHControlStateActivated;
 #pragma mark - Picker heights
 
 /// Picker view heights
-typedef CGFloat EPVPickerViewHeight;
+typedef CGFloat RDHPickerViewHeight;
 
 /// 162 pts
-UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightShortest;
+UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightShortest;
 /// 180 pts
-UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightStandard;
+UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightStandard;
 /// 216 pts
-UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
+UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightHighest;
 
 /**
  * Base class which controls the displaying and showing of the subclasses pickerView.
@@ -43,7 +43,7 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
  * `RDHControlStateActivated` when the control is expanded showing the picker.
  *
  */
-@interface EPVBaseContainerInputView : UIControl
+@interface _RDHBaseExpandingPickerContainerView : UIControl
 
 #pragma mark - Layout configuration
 /// @name Layout configuration
@@ -51,8 +51,8 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 /// Height of the view when not expanded.
 @property (nonatomic, assign) CGFloat displayHeight;
 
-/// Size of the picker view when expanded. Default value is `EPVPickerViewHeightStandard`.
-@property (nonatomic, assign) EPVPickerViewHeight pickerViewHeight;
+/// Size of the picker view when expanded. Default value is `RDHPickerViewHeightStandard`.
+@property (nonatomic, assign) RDHPickerViewHeight pickerViewHeight;
 
 /// Insets for the labels (both the `titleLabel` and `valueLabel`). The left value will be used for the `titleLabel` and the right for the `valueLabel`. Default value is `UIEdgeInsetsZero`.
 @property (nonatomic, assign) UIEdgeInsets labelEdgeInsets;
@@ -67,7 +67,7 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 @end
 
 ///
-@interface EPVBaseContainerInputView (RDHStateDisplay)
+@interface _RDHBaseExpandingPickerContainerView (RDHStateDisplay)
 
 #pragma mark - Label background color
 /// @name Label background color
@@ -137,7 +137,7 @@ UIKIT_EXTERN const EPVPickerViewHeight EPVPickerViewHeightHighest;
 
 @end
 
-@interface EPVBaseContainerInputView (RDHPickerDisplay)
+@interface _RDHBaseExpandingPickerContainerView (RDHPickerDisplay)
 
 #pragma mark - Picker background
 /// @name Picker background

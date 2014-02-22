@@ -1,24 +1,24 @@
 //
-//  EPVExpandingPickerView.m
+//  RDHExpandingPickerView.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVExpandingPickerView.h"
-#import "EPVBaseContainerInputView_EPVInternal.h"
+#import "RDHExpandingPickerView.h"
+#import "_RDHBaseExpandingPickerContainerView_RDHInternal.h"
 
 #import "NSValue+RDHSelector.h"
 #import "NSArray+RDHFill.h"
 
-@interface EPVExpandingPickerView ()<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface RDHExpandingPickerView ()<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, weak, readonly) UIPickerView *pickerView;
 
 @end
 
-@implementation EPVExpandingPickerView
+@implementation RDHExpandingPickerView
 
 -(void)willMoveToWindow:(UIWindow *)newWindow
 {
@@ -134,7 +134,7 @@
     return [self.dataSource expandingPickerView:self numberOfRowsInComponent:component];
 }
 
--(void)setDataSource:(id<EPVExpandingPickerViewDataSource>)dataSource
+-(void)setDataSource:(id<RDHExpandingPickerViewDataSource>)dataSource
 {
     if (_dataSource != dataSource) {
         _dataSource = dataSource;
@@ -144,7 +144,7 @@
     }
 }
 
--(void)setDelegate:(id<EPVExpandingPickerViewDelegate>)delegate
+-(void)setDelegate:(id<RDHExpandingPickerViewDelegate>)delegate
 {
     if (_delegate != delegate) {
         _delegate = delegate;
@@ -267,7 +267,7 @@
 
 #define RDH_SEL_VALUE(S) ([NSValue valueWithSelector:@selector(S)])
 
-/// @return A dictionary mapping `UIPickerViewDelegate` selectors to `EPVExpandingPickerViewDelegate` selectors.
+/// @return A dictionary mapping `UIPickerViewDelegate` selectors to `RDHExpandingPickerViewDelegate` selectors.
 +(NSDictionary *)mappedUIPickerViewDelegateSelectors
 {
     static NSDictionary *mappedSelectors;
@@ -285,7 +285,7 @@
     return mappedSelectors;
 }
 
-/// @return A dictionary mapping `UIPickerViewDataSource` selectors to `EPVExpandingPickerViewDataSource` selectors.
+/// @return A dictionary mapping `UIPickerViewDataSource` selectors to `RDHExpandingPickerViewDataSource` selectors.
 +(NSDictionary *)mappedUIPickerViewDataSourceSelectors
 {
     static NSDictionary *mappedSelectors;

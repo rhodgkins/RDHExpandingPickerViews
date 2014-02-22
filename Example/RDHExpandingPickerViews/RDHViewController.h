@@ -1,5 +1,5 @@
 //
-//  EPVAppDelegate.h
+//  RDHViewController.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EPVAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (nonatomic, strong) UIWindow *window;
+@interface RDHViewController : UIViewController
 
 @end

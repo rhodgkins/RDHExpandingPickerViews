@@ -1,15 +1,15 @@
 //
-//  EPVDatePickerInputView.h
+//  RDHExpandingDatePickerView.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVBaseContainerInputView.h"
+#import "_RDHBaseExpandingPickerContainerView.h"
 
 /// Expanding picker view backed by a `UIDatePicker`.
-@interface EPVDatePickerInputView : EPVBaseContainerInputView
+@interface RDHExpandingDatePickerView : _RDHBaseExpandingPickerContainerView
 
 /// The backing data picker.
 @property (nonatomic, weak, readonly) UIDatePicker *pickerView;

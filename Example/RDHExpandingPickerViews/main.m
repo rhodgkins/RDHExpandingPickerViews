@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "EPVAppDelegate.h"
+#import "RDHAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([EPVAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([RDHAppDelegate class]));
     }
 }

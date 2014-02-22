@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4499E91E18B8E5B000C49C4D /* EPVNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */; };
-		4499E91F18B8E5B000C49C4D /* EPVNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */; };
+		4499E91E18B8E5B000C49C4D /* RDHNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4499E91C18B8E5B000C49C4D /* RDHNibViewController.m */; };
+		4499E91F18B8E5B000C49C4D /* RDHNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4499E91D18B8E5B000C49C4D /* RDHNibViewController.xib */; };
 		44D5B80E18AF7B600034A875 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B80D18AF7B600034A875 /* Foundation.framework */; };
 		44D5B81018AF7B600034A875 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B80F18AF7B600034A875 /* CoreGraphics.framework */; };
 		44D5B81218AF7B600034A875 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B81118AF7B600034A875 /* UIKit.framework */; };
 		44D5B81818AF7B600034A875 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44D5B81618AF7B600034A875 /* InfoPlist.strings */; };
 		44D5B81A18AF7B600034A875 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B81918AF7B600034A875 /* main.m */; };
-		44D5B81E18AF7B600034A875 /* EPVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B81D18AF7B600034A875 /* EPVAppDelegate.m */; };
+		44D5B81E18AF7B600034A875 /* RDHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B81D18AF7B600034A875 /* RDHAppDelegate.m */; };
 		44D5B82018AF7B600034A875 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44D5B81F18AF7B600034A875 /* Images.xcassets */; };
 		44D5B82718AF7B600034A875 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B82618AF7B600034A875 /* XCTest.framework */; };
 		44D5B82818AF7B600034A875 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B80D18AF7B600034A875 /* Foundation.framework */; };
 		44D5B82918AF7B600034A875 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B81118AF7B600034A875 /* UIKit.framework */; };
 		44D5B83118AF7B600034A875 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44D5B82F18AF7B600034A875 /* InfoPlist.strings */; };
 		44D5B83318AF7B600034A875 /* RDHExpandingPickerViewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B83218AF7B600034A875 /* RDHExpandingPickerViewsTests.m */; };
-		44D5B84D18AF84800034A875 /* EPVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B84C18AF84800034A875 /* EPVViewController.m */; };
+		44D5B84D18AF84800034A875 /* RDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B84C18AF84800034A875 /* RDHViewController.m */; };
 		B561668A53374483A8CD7EA1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3360A9F4CF934E56B3235F72 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -37,19 +37,20 @@
 
 /* Begin PBXFileReference section */
 		3360A9F4CF934E56B3235F72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4499E90B18AFC5B200C49C4D /* EPVExpandingPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVExpandingPickerView.h; sourceTree = "<group>"; };
-		4499E90C18AFC5B200C49C4D /* EPVExpandingPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVExpandingPickerView.m; sourceTree = "<group>"; };
-		4499E91018B003F200C49C4D /* EPVDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVDatePicker.h; sourceTree = "<group>"; };
-		4499E91118B003F200C49C4D /* EPVDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVDatePicker.m; sourceTree = "<group>"; };
+		4499E90B18AFC5B200C49C4D /* RDHExpandingPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHExpandingPickerView.h; sourceTree = "<group>"; };
+		4499E90C18AFC5B200C49C4D /* RDHExpandingPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHExpandingPickerView.m; sourceTree = "<group>"; };
+		4499E91018B003F200C49C4D /* RDHDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHDatePicker.h; sourceTree = "<group>"; };
+		4499E91118B003F200C49C4D /* RDHDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHDatePicker.m; sourceTree = "<group>"; };
 		4499E91518B11AA100C49C4D /* NSValue+RDHSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSValue+RDHSelector.h"; sourceTree = "<group>"; };
 		4499E91618B11AA100C49C4D /* NSValue+RDHSelector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSValue+RDHSelector.m"; sourceTree = "<group>"; };
 		4499E91718B11AA100C49C4D /* UIImage+RDHColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RDHColor.h"; sourceTree = "<group>"; };
 		4499E91818B11AA100C49C4D /* UIImage+RDHColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RDHColor.m"; sourceTree = "<group>"; };
 		4499E91918B12B0200C49C4D /* NSArray+RDHFill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+RDHFill.h"; sourceTree = "<group>"; };
 		4499E91A18B12B0200C49C4D /* NSArray+RDHFill.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RDHFill.m"; sourceTree = "<group>"; };
-		4499E91B18B8E5B000C49C4D /* EPVNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPVNibViewController.h; sourceTree = "<group>"; };
-		4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPVNibViewController.m; sourceTree = "<group>"; };
-		4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPVNibViewController.xib; sourceTree = "<group>"; };
+		4499E91B18B8E5B000C49C4D /* RDHNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDHNibViewController.h; sourceTree = "<group>"; };
+		4499E91C18B8E5B000C49C4D /* RDHNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDHNibViewController.m; sourceTree = "<group>"; };
+		4499E91D18B8E5B000C49C4D /* RDHNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RDHNibViewController.xib; sourceTree = "<group>"; };
+		4499E92018B8ED1C00C49C4D /* RDHColorUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHColorUtils.h; sourceTree = "<group>"; };
 		44D5B80A18AF7B600034A875 /* RDHExpandingPickerViews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDHExpandingPickerViews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D5B80D18AF7B600034A875 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		44D5B80F18AF7B600034A875 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,23 +59,23 @@
 		44D5B81718AF7B600034A875 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44D5B81918AF7B600034A875 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44D5B81B18AF7B600034A875 /* RDHExpandingPickerViews-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RDHExpandingPickerViews-Prefix.pch"; sourceTree = "<group>"; };
-		44D5B81C18AF7B600034A875 /* EPVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVAppDelegate.h; sourceTree = "<group>"; };
-		44D5B81D18AF7B600034A875 /* EPVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVAppDelegate.m; sourceTree = "<group>"; };
+		44D5B81C18AF7B600034A875 /* RDHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHAppDelegate.h; sourceTree = "<group>"; };
+		44D5B81D18AF7B600034A875 /* RDHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHAppDelegate.m; sourceTree = "<group>"; };
 		44D5B81F18AF7B600034A875 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		44D5B82518AF7B600034A875 /* RDHExpandingPickerViewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RDHExpandingPickerViewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D5B82618AF7B600034A875 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		44D5B82E18AF7B600034A875 /* RDHExpandingPickerViewsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RDHExpandingPickerViewsTests-Info.plist"; sourceTree = "<group>"; };
 		44D5B83018AF7B600034A875 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44D5B83218AF7B600034A875 /* RDHExpandingPickerViewsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHExpandingPickerViewsTests.m; sourceTree = "<group>"; };
-		44D5B84818AF83720034A875 /* EPVBaseContainerInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVBaseContainerInputView.h; sourceTree = "<group>"; };
-		44D5B84918AF83720034A875 /* EPVBaseContainerInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVBaseContainerInputView.m; sourceTree = "<group>"; };
-		44D5B84B18AF84800034A875 /* EPVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPVViewController.h; sourceTree = "<group>"; };
-		44D5B84C18AF84800034A875 /* EPVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPVViewController.m; sourceTree = "<group>"; };
-		44D5B84E18AF86530034A875 /* EPVDatePickerInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVDatePickerInputView.h; sourceTree = "<group>"; };
-		44D5B84F18AF86530034A875 /* EPVDatePickerInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVDatePickerInputView.m; sourceTree = "<group>"; };
-		44D5B85018AF87E50034A875 /* EPVBaseContainerInputView_EPVInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVBaseContainerInputView_EPVInternal.h; sourceTree = "<group>"; };
-		44D5B85118AF8B0C0034A875 /* EPVActivationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EPVActivationButton.h; sourceTree = "<group>"; };
-		44D5B85218AF8B0C0034A875 /* EPVActivationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EPVActivationButton.m; sourceTree = "<group>"; };
+		44D5B84818AF83720034A875 /* _RDHBaseExpandingPickerContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RDHBaseExpandingPickerContainerView.h; sourceTree = "<group>"; };
+		44D5B84918AF83720034A875 /* _RDHBaseExpandingPickerContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _RDHBaseExpandingPickerContainerView.m; sourceTree = "<group>"; };
+		44D5B84B18AF84800034A875 /* RDHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDHViewController.h; sourceTree = "<group>"; };
+		44D5B84C18AF84800034A875 /* RDHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDHViewController.m; sourceTree = "<group>"; };
+		44D5B84E18AF86530034A875 /* RDHExpandingDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHExpandingDatePickerView.h; sourceTree = "<group>"; };
+		44D5B84F18AF86530034A875 /* RDHExpandingDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHExpandingDatePickerView.m; sourceTree = "<group>"; };
+		44D5B85018AF87E50034A875 /* _RDHBaseExpandingPickerContainerView_RDHInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RDHBaseExpandingPickerContainerView_RDHInternal.h; sourceTree = "<group>"; };
+		44D5B85118AF8B0C0034A875 /* RDHActivationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHActivationButton.h; sourceTree = "<group>"; };
+		44D5B85218AF8B0C0034A875 /* RDHActivationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHActivationButton.m; sourceTree = "<group>"; };
 		9240D29960E1496999656D9E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +113,7 @@
 				4499E91A18B12B0200C49C4D /* NSArray+RDHFill.m */,
 				4499E91718B11AA100C49C4D /* UIImage+RDHColor.h */,
 				4499E91818B11AA100C49C4D /* UIImage+RDHColor.m */,
+				4499E92018B8ED1C00C49C4D /* RDHColorUtils.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -152,13 +154,13 @@
 		44D5B81318AF7B600034A875 /* RDHExpandingPickerViews */ = {
 			isa = PBXGroup;
 			children = (
-				44D5B81C18AF7B600034A875 /* EPVAppDelegate.h */,
-				44D5B81D18AF7B600034A875 /* EPVAppDelegate.m */,
-				44D5B84B18AF84800034A875 /* EPVViewController.h */,
-				44D5B84C18AF84800034A875 /* EPVViewController.m */,
-				4499E91B18B8E5B000C49C4D /* EPVNibViewController.h */,
-				4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */,
-				4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */,
+				44D5B81C18AF7B600034A875 /* RDHAppDelegate.h */,
+				44D5B81D18AF7B600034A875 /* RDHAppDelegate.m */,
+				44D5B84B18AF84800034A875 /* RDHViewController.h */,
+				44D5B84C18AF84800034A875 /* RDHViewController.m */,
+				4499E91B18B8E5B000C49C4D /* RDHNibViewController.h */,
+				4499E91C18B8E5B000C49C4D /* RDHNibViewController.m */,
+				4499E91D18B8E5B000C49C4D /* RDHNibViewController.xib */,
 				44D5B81F18AF7B600034A875 /* Images.xcassets */,
 				44D5B81418AF7B600034A875 /* Supporting Files */,
 			);
@@ -208,8 +210,8 @@
 		44D5B84618AF83720034A875 /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				44D5B84E18AF86530034A875 /* EPVDatePickerInputView.h */,
-				44D5B84F18AF86530034A875 /* EPVDatePickerInputView.m */,
+				44D5B84E18AF86530034A875 /* RDHExpandingDatePickerView.h */,
+				44D5B84F18AF86530034A875 /* RDHExpandingDatePickerView.m */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -217,13 +219,13 @@
 		44D5B84718AF83720034A875 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				44D5B85018AF87E50034A875 /* EPVBaseContainerInputView_EPVInternal.h */,
-				44D5B84818AF83720034A875 /* EPVBaseContainerInputView.h */,
-				44D5B84918AF83720034A875 /* EPVBaseContainerInputView.m */,
-				44D5B85118AF8B0C0034A875 /* EPVActivationButton.h */,
-				44D5B85218AF8B0C0034A875 /* EPVActivationButton.m */,
-				4499E91018B003F200C49C4D /* EPVDatePicker.h */,
-				4499E91118B003F200C49C4D /* EPVDatePicker.m */,
+				44D5B85018AF87E50034A875 /* _RDHBaseExpandingPickerContainerView_RDHInternal.h */,
+				44D5B84818AF83720034A875 /* _RDHBaseExpandingPickerContainerView.h */,
+				44D5B84918AF83720034A875 /* _RDHBaseExpandingPickerContainerView.m */,
+				44D5B85118AF8B0C0034A875 /* RDHActivationButton.h */,
+				44D5B85218AF8B0C0034A875 /* RDHActivationButton.m */,
+				4499E91018B003F200C49C4D /* RDHDatePicker.h */,
+				4499E91118B003F200C49C4D /* RDHDatePicker.m */,
 				4499E91418B11AA100C49C4D /* Utils */,
 			);
 			path = Internal;
@@ -232,8 +234,8 @@
 		44D5B84A18AF83720034A875 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				4499E90B18AFC5B200C49C4D /* EPVExpandingPickerView.h */,
-				4499E90C18AFC5B200C49C4D /* EPVExpandingPickerView.m */,
+				4499E90B18AFC5B200C49C4D /* RDHExpandingPickerView.h */,
+				4499E90C18AFC5B200C49C4D /* RDHExpandingPickerView.m */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -284,7 +286,7 @@
 		44D5B80218AF7B600034A875 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = EPV;
+				CLASSPREFIX = RDH;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Rich H";
 				TargetAttributes = {
@@ -318,7 +320,7 @@
 			files = (
 				44D5B81818AF7B600034A875 /* InfoPlist.strings in Resources */,
 				44D5B82018AF7B600034A875 /* Images.xcassets in Resources */,
-				4499E91F18B8E5B000C49C4D /* EPVNibViewController.xib in Resources */,
+				4499E91F18B8E5B000C49C4D /* RDHNibViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,10 +372,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4499E91E18B8E5B000C49C4D /* EPVNibViewController.m in Sources */,
+				4499E91E18B8E5B000C49C4D /* RDHNibViewController.m in Sources */,
 				44D5B81A18AF7B600034A875 /* main.m in Sources */,
-				44D5B84D18AF84800034A875 /* EPVViewController.m in Sources */,
-				44D5B81E18AF7B600034A875 /* EPVAppDelegate.m in Sources */,
+				44D5B84D18AF84800034A875 /* RDHViewController.m in Sources */,
+				44D5B81E18AF7B600034A875 /* RDHAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,27 +1,27 @@
 //
-//  EPVViewController.m
+//  RDHViewController.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVViewController.h"
+#import "RDHViewController.h"
 
 #import <UIView-Autolayout/UIView+AutoLayout.h>
 
-#import <RDHExpandingPickerViews/EPVDatePickerInputView.h>
-#import <RDHExpandingPickerViews/EPVExpandingPickerView.h>
+#import <RDHExpandingPickerViews/RDHExpandingDatePickerView.h>
+#import <RDHExpandingPickerViews/RDHExpandingPickerView.h>
 
 #import "UIImage+RDHColor.h"
 
-@interface EPVViewController ()<EPVExpandingPickerViewDataSource, EPVExpandingPickerViewDelegate>
+@interface RDHViewController ()<RDHExpandingPickerViewDataSource, RDHExpandingPickerViewDelegate>
 
-@property (nonatomic, weak) EPVDatePickerInputView *countDownPickerInputView;
+@property (nonatomic, weak) RDHExpandingDatePickerView *countDownPickerInputView;
 
-@property (nonatomic, weak) EPVDatePickerInputView *datePickerInputView;
+@property (nonatomic, weak) RDHExpandingDatePickerView *datePickerInputView;
 
-@property (nonatomic, weak) EPVExpandingPickerView *expandingPickerView;
+@property (nonatomic, weak) RDHExpandingPickerView *expandingPickerView;
 
 @property (nonatomic, copy) NSArray *pickerItems;
 
@@ -29,13 +29,13 @@
 
 @end
 
-@implementation EPVViewController
+@implementation RDHViewController
 
 -(void)loadView
 {
     self.view = [UIScrollView new];
         
-    EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
+    RDHExpandingDatePickerView *datePickerInputView = [RDHExpandingDatePickerView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
     [self setup:datePickerInputView];
 //    datePickerInputView.titleLabel.text = @"Title";
@@ -57,7 +57,7 @@
     [datePickerInputView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
  
     
-    EPVDatePickerInputView *countDownPickerInputView = [EPVDatePickerInputView autoLayoutView];
+    RDHExpandingDatePickerView *countDownPickerInputView = [RDHExpandingDatePickerView autoLayoutView];
     [self setup:countDownPickerInputView];
     countDownPickerInputView.pickerView.datePickerMode = UIDatePickerModeCountDownTimer;
 //    countDownPickerInputView.selectedTimeInterval = 2213;
@@ -79,7 +79,7 @@
     [countDownPickerInputView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
     
     
-    EPVExpandingPickerView *expandingPickerView = [EPVExpandingPickerView autoLayoutView];
+    RDHExpandingPickerView *expandingPickerView = [RDHExpandingPickerView autoLayoutView];
     expandingPickerView.placeholderValue = @"Picker";
     [self setup:expandingPickerView];
 //    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
@@ -119,7 +119,7 @@
 //    [b pinToSuperviewEdges:JRTViewPinAllEdges inset:10];
 }
 
--(void)setup:(EPVBaseContainerInputView *)datePickerInputView
+-(void)setup:(_RDHBaseExpandingPickerContainerView *)datePickerInputView
 {
     [datePickerInputView setTitle:@"TitleN" forState:UIControlStateNormal];
     [datePickerInputView setTitle:@"TitleS" forState:UIControlStateSelected];
@@ -140,13 +140,13 @@
     [datePickerInputView setTitle:@"TitleDAS" forState:RDHControlStateActivated|UIControlStateSelected | UIControlStateDisabled];
 }
 
--(void)editingDidBeingForExpandingPickerView:(EPVBaseContainerInputView *)expandingPickerView
+-(void)editingDidBeingForExpandingPickerView:(_RDHBaseExpandingPickerContainerView *)expandingPickerView
 {
     CGRect rect = [self.view convertRect:expandingPickerView.bounds fromView:expandingPickerView];
     [self.view scrollRectToVisible:rect animated:YES];
 }
 
--(void)editingDidEndForExpandingPickerView:(EPVBaseContainerInputView *)expandingPickerView
+-(void)editingDidEndForExpandingPickerView:(_RDHBaseExpandingPickerContainerView *)expandingPickerView
 {
 //    CGRect rect = [self.view convertRect:expandingPickerView.bounds fromView:expandingPickerView];
 //    [self.view scrollRectToVisible:rect animated:YES];
@@ -156,12 +156,12 @@
 
 #pragma mark - Expanding picker view data source
 
--(NSUInteger)numberOfComponentsInExpandingPickerView:(EPVExpandingPickerView *)expandingPickerView
+-(NSUInteger)numberOfComponentsInExpandingPickerView:(RDHExpandingPickerView *)expandingPickerView
 {
     return 2;
 }
 
--(NSUInteger)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component
+-(NSUInteger)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component
 {
     if (component == 0) {
         // Letters
@@ -173,12 +173,12 @@
 
 #pragma mark - Expanding picker view delegate
 
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject
 {
     return [NSString stringWithFormat:@"%@%@", self.pickerItems[[selectedObject[0] unsignedIntegerValue]], selectedObject[1]];
 }
 
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component
 {
     if (component == 0) {
         return self.pickerItems[row];

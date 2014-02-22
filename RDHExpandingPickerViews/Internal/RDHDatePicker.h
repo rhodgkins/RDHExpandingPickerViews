@@ -1,5 +1,5 @@
 //
-//  EPVDatePicker.h
+//  RDHDatePicker.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 /// Simple subclass that notifies any observers that the date has changed when calling `-[UIDatePicker setDate:animated:]`.
-@interface EPVDatePicker : UIDatePicker
+@interface RDHDatePicker : UIDatePicker
 
 @end

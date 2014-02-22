@@ -1,26 +1,26 @@
 //
-//  EPVActivationButton.m
+//  RDHActivationButton.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVActivationButton.h"
+#import "RDHActivationButton.h"
 
 #import "UIImage+RDHColor.h"
 
-#import "EPVBaseContainerInputView.h"
+#import "_RDHBaseExpandingPickerContainerView.h"
 
-static void *EPVContextAttributedText = &EPVContextAttributedText;
-static void *EPVContextText = &EPVContextText;
+static void *RDHContextText = &RDHContextText;
+static void *RDHContextAttributedText = &RDHContextAttributedText;
 
 static NSString *const RDHStateKeyText = @"text";
 static NSString *const RDHStateKeyColor = @"color";
 static NSString *const RDHStateKeyShadowColor = @"shadowColor";
 static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
-@interface EPVActivationButton ()
+@interface RDHActivationButton ()
 
 @property (nonatomic, copy) NSMutableDictionary *backgroundStateColors;
 
@@ -28,7 +28,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 @end
 
-@implementation EPVActivationButton
+@implementation RDHActivationButton
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -52,8 +52,8 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 -(void)dealloc
 {
-    [_infoLabel removeObserver:self forKeyPath:NSStringFromSelector(@selector(text)) context:EPVContextText];
-    [_infoLabel removeObserver:self forKeyPath:NSStringFromSelector(@selector(attributedText)) context:EPVContextAttributedText];
+    [_infoLabel removeObserver:self forKeyPath:NSStringFromSelector(@selector(text)) context:RDHContextText];
+    [_infoLabel removeObserver:self forKeyPath:NSStringFromSelector(@selector(attributedText)) context:RDHContextAttributedText];
 }
 
 -(void)commonInit
@@ -78,8 +78,8 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
     // Listen for changes to the text labels
-    [self.infoLabel addObserver:self forKeyPath:NSStringFromSelector(@selector(text)) options:0 context:EPVContextText];
-    [self.infoLabel addObserver:self forKeyPath:NSStringFromSelector(@selector(attributedText)) options:0 context:EPVContextAttributedText];
+    [self.infoLabel addObserver:self forKeyPath:NSStringFromSelector(@selector(text)) options:0 context:RDHContextText];
+    [self.infoLabel addObserver:self forKeyPath:NSStringFromSelector(@selector(attributedText)) options:0 context:RDHContextAttributedText];
 }
 
 #pragma mark - Layout
@@ -180,7 +180,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == EPVContextText || context == EPVContextAttributedText) {
+    if (context == RDHContextText || context == RDHContextAttributedText) {
         [self setNeedsLayout];
     } else if ([super respondsToSelector:_cmd]) {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -189,7 +189,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 @end
 
-@implementation EPVActivationButton (RDHBackgroundStates)
+@implementation RDHActivationButton (RDHBackgroundStates)
 
 
 #pragma mark - Background state
@@ -230,7 +230,7 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 @end
 
-@implementation EPVActivationButton (RDHInfoStates)
+@implementation RDHActivationButton (RDHInfoStates)
 
 #pragma mark - Info state
 

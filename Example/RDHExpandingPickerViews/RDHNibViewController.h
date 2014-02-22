@@ -1,5 +1,5 @@
 //
-//  EPVNibViewController.h
+//  RDHNibViewController.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 22/02/2014.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EPVNibViewController : UIViewController
+@interface RDHNibViewController : UIViewController
 
 @end

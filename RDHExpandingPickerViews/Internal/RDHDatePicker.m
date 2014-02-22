@@ -1,23 +1,23 @@
 //
-//  EPVDatePicker.m
+//  RDHDatePicker.m
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVDatePicker.h"
+#import "RDHDatePicker.h"
 
 // Fixed a bug in iOS 7, see http://stackoverflow.com/questions/20181980/uidatepicker-bug-uicontroleventvaluechanged-after-hitting-minimum-internal
 #define RDH_IOS7_COUNT_DOWN_TIME_FIX 1
 
-@implementation EPVDatePicker
+@implementation RDHDatePicker
 #if RDH_IOS7_COUNT_DOWN_TIME_FIX
 {
     BOOL firstChange;
 }
 
-// Only need to override this as a EPVDatePicker view is only ever initialized by 'new'
+// Only need to override this as a RDHDatePicker view is only ever initialized by 'new'
 -(instancetype)init
 {
     self = [super init];

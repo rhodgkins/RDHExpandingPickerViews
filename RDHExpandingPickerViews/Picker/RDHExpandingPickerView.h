@@ -1,27 +1,27 @@
 //
-//  EPVExpandingPickerView.h
+//  RDHExpandingPickerView.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
 //  Copyright (c) 2014 Rich H. All rights reserved.
 //
 
-#import "EPVBaseContainerInputView.h"
+#import "_RDHBaseExpandingPickerContainerView.h"
 
-@protocol EPVExpandingPickerViewDataSource, EPVExpandingPickerViewDelegate;
+@protocol RDHExpandingPickerViewDataSource, RDHExpandingPickerViewDelegate;
 
 /// Expanding picker view backed by a `UIPickerView`.
-@interface EPVExpandingPickerView : EPVBaseContainerInputView
+@interface RDHExpandingPickerView : _RDHBaseExpandingPickerContainerView
 
 /// @name Data source
 
 /// Data source
-@property (nonatomic, weak) IBOutlet id<EPVExpandingPickerViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<RDHExpandingPickerViewDataSource> dataSource;
 
 /// @name Delegate
 
 /// Delegate
-@property (nonatomic, weak) IBOutlet id<EPVExpandingPickerViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<RDHExpandingPickerViewDelegate> delegate;
 
 /// @name Data methods
 
@@ -53,7 +53,7 @@
 @end
 
 /// Defines data values for the expanding picker view.
-@protocol EPVExpandingPickerViewDataSource <NSObject>
+@protocol RDHExpandingPickerViewDataSource <NSObject>
 
 @required
 
@@ -62,7 +62,7 @@
  *
  * @returns The number of components.
  */
--(NSUInteger)numberOfComponentsInExpandingPickerView:(EPVExpandingPickerView *)expandingPickerView;
+-(NSUInteger)numberOfComponentsInExpandingPickerView:(RDHExpandingPickerView *)expandingPickerView;
 
 /**
  * @param expandingPickerView The expanding picker view requesting the number of rows.
@@ -70,12 +70,12 @@
  *
  * @returns The number of row for the component.
  */
--(NSUInteger)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component;
+-(NSUInteger)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView numberOfRowsInComponent:(NSUInteger)component;
 
 @end
 
 /// Defines actions and views for the expanding picker view.
-@protocol EPVExpandingPickerViewDelegate <NSObject>
+@protocol RDHExpandingPickerViewDelegate <NSObject>
 
 @required
 #pragma mark - Value display methods
@@ -83,21 +83,21 @@
 
 /**
  * @param expandingPickerView The expanding picker view requesting the display value.
- * @param selectedObject see `-[EPVExpandingPickerView selectedObject]`.
+ * @param selectedObject see `-[RDHExpandingPickerView selectedObject]`.
  *
- * @return The value to display in the `-[EPVBaseContainerInputView valueLabel]`.
+ * @return The value to display in the `-[RDHBaseContainerInputView valueLabel]`.
  */
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject;
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView displayValueForSelectedObject:(NSArray *)selectedObject;
 
 @optional
 
 /**
  * @param expandingPickerView The expanding picker view requesting the attributed display value.
- * @param selectedObject see `-[EPVExpandingPickerView selectedObject]`.
+ * @param selectedObject see `-[RDHExpandingPickerView selectedObject]`.
  *
- * @return The attributed value to display in the `-[EPVBaseContainerInputView valueLabel]`.
+ * @return The attributed value to display in the `-[RDHBaseContainerInputView valueLabel]`.
  */
--(NSAttributedString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView attributedDisplayValueForSelectedObject:(NSArray *)selectedObject;
+-(NSAttributedString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView attributedDisplayValueForSelectedObject:(NSArray *)selectedObject;
 
 #pragma mark - Sizing methods
 /// @name Sizing methods
@@ -108,7 +108,7 @@
  *
  * @return width of column the component.
  */
--(CGFloat)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView widthForComponent:(NSUInteger)component;
+-(CGFloat)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView widthForComponent:(NSUInteger)component;
 
 /**
  * @param expandingPickerView The expanding picker view requesting the row height.
@@ -116,7 +116,7 @@
  *
  * @return height of row for each component.
  */
--(CGFloat)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView rowHeightForComponent:(NSUInteger)component;
+-(CGFloat)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView rowHeightForComponent:(NSUInteger)component;
 
 @optional
 #pragma mark - Content display methods
@@ -131,7 +131,7 @@
  *
  * @return the title for the row in the component.
  */
--(NSString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
+-(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
 
 /**
  * This method overrides `-expandingPickerView:titleForRow:forComponent:` but ignored if `-expandingPickerView:viewForRow:forComponent:reusingView:` is implemented.
@@ -142,7 +142,7 @@
  *
  * @return the attributed title for the row in the component.
  */
--(NSAttributedString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView attributedTitleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
+-(NSAttributedString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView attributedTitleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
 
 /**
  * This method overrides `-expandingPickerView:titleForRow:forComponent:` and `-expandingPickerView:attributedTitleForRow:forComponent:`if it is implemented.
@@ -154,7 +154,7 @@
  *
  * @return the view for the row in the component.
  */
--(UIView *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView viewForRow:(NSUInteger)row forComponent:(NSUInteger)component reusingView:(UIView *)view;
+-(UIView *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView viewForRow:(NSUInteger)row forComponent:(NSUInteger)component reusingView:(UIView *)view;
 
 @optional
 #pragma mark - Selection methods
@@ -165,6 +165,6 @@
  * @param row The row that was selected.
  * @param component The component for the row.
  */
--(void)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView didSelectRow:(NSUInteger)row inComponent:(NSUInteger)component;
+-(void)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView didSelectRow:(NSUInteger)row inComponent:(NSUInteger)component;
 
 @end

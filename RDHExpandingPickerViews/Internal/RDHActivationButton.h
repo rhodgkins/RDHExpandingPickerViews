@@ -1,5 +1,5 @@
 //
-//  EPVActivationButton.h
+//  RDHActivationButton.h
 //  RDHExpandingPickerViews
 //
 //  Created by Richard Hodgkins on 15/02/2014.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EPVActivationButton : UIButton
+@interface RDHActivationButton : UIButton
 
 /// Activated == expanded
 @property (nonatomic, assign, getter = isActivated) BOOL activated;
@@ -21,7 +21,7 @@
 
 @end
 
-@interface EPVActivationButton (RDHBackgroundStates)
+@interface RDHActivationButton (RDHBackgroundStates)
 
 #pragma mark - Background state
 /// @name Background state
@@ -34,7 +34,7 @@
 
 @end
 
-@interface EPVActivationButton (RDHInfoStates)
+@interface RDHActivationButton (RDHInfoStates)
 
 #pragma mark - Info state
 /// @name Info state
