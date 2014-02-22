@@ -78,6 +78,7 @@
 @protocol EPVExpandingPickerViewDelegate <NSObject>
 
 @required
+#pragma mark - Value display methods
 /// @name Value display methods
 
 /**
@@ -98,6 +99,7 @@
  */
 -(NSAttributedString *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView attributedDisplayValueForSelectedObject:(NSArray *)selectedObject;
 
+#pragma mark - Sizing methods
 /// @name Sizing methods
 
 /**
@@ -117,6 +119,7 @@
 -(CGFloat)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView rowHeightForComponent:(NSUInteger)component;
 
 @optional
+#pragma mark - Content display methods
 /// @name Content display methods
 
 /**
@@ -154,6 +157,7 @@
 -(UIView *)expandingPickerView:(EPVExpandingPickerView *)expandingPickerView viewForRow:(NSUInteger)row forComponent:(NSUInteger)component reusingView:(UIView *)view;
 
 @optional
+#pragma mark - Selection methods
 /// @name Selection methods
 
 /**
