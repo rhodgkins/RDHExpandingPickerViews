@@ -12,6 +12,8 @@
 
 #import "_RDHBaseExpandingPickerContainerView.h"
 
+static const CGFloat RDHLabelGap = 2;
+
 static void *RDHContextText = &RDHContextText;
 static void *RDHContextAttributedText = &RDHContextAttributedText;
 
@@ -93,18 +95,35 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
     self.infoLabel.frame = infoFrame;
     
     UIEdgeInsets buttonTitleInsets = self.labelEdgeInsets;
-    buttonTitleInsets.left = CGRectGetMaxX(self.infoLabel.frame);
+    buttonTitleInsets.left = CGRectGetMaxX(self.infoLabel.frame) + RDHLabelGap;
     self.titleEdgeInsets = buttonTitleInsets;
 }
 
 -(CGFloat)infoTextWidthForContainerSize:(CGSize)size
 {
-    CGSize maxSize = size;
-    maxSize.width /= 2;
-    
     NSStringDrawingOptions options = NSStringDrawingUsesFontLeading;
     NSStringDrawingContext *context = nil;
     
+    // Measure the value text
+    CGRect valueRect;
+    if (self.currentAttributedTitle) {
+        valueRect = [self.currentAttributedTitle boundingRectWithSize:size options:options context:context];
+    } else {
+        valueRect = [self.currentTitle boundingRectWithSize:size options:options attributes:nil context:context];
+    }
+    
+    // Max allowed width of title is half of the size (unless the value is small)
+    CGSize maxSize = size;
+    maxSize.width /= 2;
+    maxSize.width -= RDHLabelGap;
+    
+    // If the value isn't very large allow the title to take up the rest of the space
+    CGFloat remainingWidth = size.width - ceil(CGRectGetWidth(valueRect));
+    if (maxSize.width < remainingWidth) {
+        maxSize.width = remainingWidth;
+    }
+    
+    // Measure the title text
     CGRect bounds;
     if (self.infoLabel.attributedText) {
         bounds = [self.infoLabel.attributedText boundingRectWithSize:maxSize options:options context:context];
