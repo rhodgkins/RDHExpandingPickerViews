@@ -262,8 +262,8 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
     BOOL changed = self.activated != activated;
     self.button.activated = activated;
     if (changed) {
-        [self togglePicker:animated];
         [self stateUpdated];
+        [self togglePicker:animated];
     }
 }
 
@@ -294,6 +294,11 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
         [self setSelectedValue:nil];
         [self setSelectedAttributedValue:nil];
     }
+    // Layout the button
+    [CATransaction begin];
+    [CATransaction setDisableActions: YES];
+    [self.button layoutIfNeeded];
+    [CATransaction commit];
 }
 
 +(NSArray *)selectedStates
@@ -335,7 +340,6 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
 
 -(void)togglePicker:(BOOL)animated
 {
-    [self layoutIfNeeded];
     self.heightConstraint.constant = [self contentHeight];
     dispatch_block_t animationBlock = ^{
         self.pickerView.alpha = [self isActivated] ? 1 : 0;
@@ -345,7 +349,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
         [self invalidateIntrinsicContentSize];
     };
     if (animated) {
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:animationBlock completion:completionBlock];
+        [UIView animateWithDuration:3 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:animationBlock completion:completionBlock];
     } else {
         animationBlock();
         completionBlock(YES);
