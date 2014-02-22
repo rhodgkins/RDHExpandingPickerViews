@@ -468,8 +468,8 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
 {
     NSAssert(self.selectedObject, @"Asking for an attributed display value when there is no selected object");
     
-    if (self.attriburedDisplayValueBlock) {
-        return self.attriburedDisplayValueBlock(self, self.selectedObject);
+    if (self.attributedDisplayValueBlock) {
+        return self.attributedDisplayValueBlock(self, self.selectedObject);
     } else {
         return [self defaultAttributedDisplayValueForSelectedObject];
     }

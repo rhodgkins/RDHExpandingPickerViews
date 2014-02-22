@@ -53,8 +53,10 @@
 #pragma mark - Display blocks
 /// @name Display blocks
 
+/// This will be ignored if `attributedDisplayValueBlock` is set or returns `nil`.
 @property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
 
+/// This will be used over `displayValueBlock`.
 @property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
 
 @end

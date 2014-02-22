@@ -57,6 +57,6 @@
 
 @property (nonatomic, copy) NSString*(^displayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
 
-@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
+@property (nonatomic, copy) NSAttributedString*(^attributedDisplayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
 
 @end
