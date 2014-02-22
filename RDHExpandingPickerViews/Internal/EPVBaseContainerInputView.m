@@ -349,7 +349,7 @@ const EPVPickerViewHeight EPVPickerViewHeightHighest = 216.0;
         [self invalidateIntrinsicContentSize];
     };
     if (animated) {
-        [UIView animateWithDuration:3 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:animationBlock completion:completionBlock];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:animationBlock completion:completionBlock];
     } else {
         animationBlock();
         completionBlock(YES);
