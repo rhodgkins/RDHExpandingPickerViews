@@ -37,25 +37,9 @@
         
     EPVDatePickerInputView *datePickerInputView = [EPVDatePickerInputView autoLayoutView];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
+    [self setup:datePickerInputView];
 //    datePickerInputView.titleLabel.text = @"Title";
     //    [datePickerInputView setTitle:@"Title" forState:~(0L)];
-    [datePickerInputView setTitle:@"TitleN" forState:UIControlStateNormal];
-    [datePickerInputView setTitle:@"TitleS" forState:UIControlStateSelected];
-    [datePickerInputView setTitle:@"TitleNH" forState:UIControlStateNormal|UIControlStateHighlighted];
-    [datePickerInputView setTitle:@"TitleSH" forState:UIControlStateSelected|UIControlStateHighlighted];
-    [datePickerInputView setTitle:@"TitleAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected];
-    [datePickerInputView setTitle:@"TitleAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal];
-    [datePickerInputView setTitle:@"TitleA" forState:RDHControlStateActivated];
-    [datePickerInputView setTitle:@"TitleAS" forState:RDHControlStateActivated|UIControlStateSelected];
-    
-    [datePickerInputView setTitle:@"TitleDN" forState:UIControlStateNormal | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDS" forState:UIControlStateSelected | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDNH" forState:UIControlStateNormal|UIControlStateHighlighted | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDSH" forState:UIControlStateSelected|UIControlStateHighlighted | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDA" forState:RDHControlStateActivated | UIControlStateDisabled];
-    [datePickerInputView setTitle:@"TitleDAS" forState:RDHControlStateActivated|UIControlStateSelected | UIControlStateDisabled];
     datePickerInputView.labelEdgeInsets = UIEdgeInsetsMake(2, 10, 5, 20);
     datePickerInputView.placeholderValue = @"Date";
 //    datePickerInputView.pickerViewBackgroundColor = [UIColor cyanColor];
@@ -74,7 +58,7 @@
  
     
     EPVDatePickerInputView *countDownPickerInputView = [EPVDatePickerInputView autoLayoutView];
-    countDownPickerInputView.titleLabel.text = @"Title";
+    [self setup:countDownPickerInputView];
     countDownPickerInputView.pickerView.datePickerMode = UIDatePickerModeCountDownTimer;
 //    countDownPickerInputView.selectedTimeInterval = 2213;
 //    countDownPickerInputView.pickerView.minuteInterval = 5;
@@ -96,15 +80,16 @@
     
     
     EPVExpandingPickerView *expandingPickerView = [EPVExpandingPickerView autoLayoutView];
-    expandingPickerView.titleLabel.text = @"Title";
     expandingPickerView.placeholderValue = @"Picker";
+    [self setup:expandingPickerView];
 //    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
 //    expandingPickerView.displayHighlightedBackgroundColor = [UIColor orangeColor];
-//    expandingPickerView.dataSource = self;
+    expandingPickerView.dataSource = self;
     expandingPickerView.delegate = self;
     expandingPickerView.selectedObject = nil;
     [expandingPickerView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [expandingPickerView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
+    expandingPickerView.placeholderValueColor = [UIColor blueColor];
     
     [self.view addSubview:expandingPickerView];
     self.expandingPickerView = expandingPickerView;
@@ -132,6 +117,27 @@
 //    
 //    [self.view addSubview:b];
 //    [b pinToSuperviewEdges:JRTViewPinAllEdges inset:10];
+}
+
+-(void)setup:(EPVBaseContainerInputView *)datePickerInputView
+{
+    [datePickerInputView setTitle:@"TitleN" forState:UIControlStateNormal];
+    [datePickerInputView setTitle:@"TitleS" forState:UIControlStateSelected];
+    [datePickerInputView setTitle:@"TitleNH" forState:UIControlStateNormal|UIControlStateHighlighted];
+    [datePickerInputView setTitle:@"TitleSH" forState:UIControlStateSelected|UIControlStateHighlighted];
+    [datePickerInputView setTitle:@"TitleAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected];
+    [datePickerInputView setTitle:@"TitleAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal];
+    [datePickerInputView setTitle:@"TitleA" forState:RDHControlStateActivated];
+    [datePickerInputView setTitle:@"TitleAS" forState:RDHControlStateActivated|UIControlStateSelected];
+    
+    [datePickerInputView setTitle:@"TitleDN" forState:UIControlStateNormal | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDS" forState:UIControlStateSelected | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDNH" forState:UIControlStateNormal|UIControlStateHighlighted | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDSH" forState:UIControlStateSelected|UIControlStateHighlighted | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAHS" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateSelected | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAHN" forState:RDHControlStateActivated|UIControlStateHighlighted|UIControlStateNormal | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDA" forState:RDHControlStateActivated | UIControlStateDisabled];
+    [datePickerInputView setTitle:@"TitleDAS" forState:RDHControlStateActivated|UIControlStateSelected | UIControlStateDisabled];
 }
 
 -(void)editingDidBeingForExpandingPickerView:(EPVBaseContainerInputView *)expandingPickerView

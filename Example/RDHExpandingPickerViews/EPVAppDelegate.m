@@ -9,6 +9,7 @@
 #import "EPVAppDelegate.h"
 
 #import "EPVViewController.h"
+#import "EPVNibViewController.h"
 
 @implementation EPVAppDelegate
 

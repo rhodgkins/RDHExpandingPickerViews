@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4499E91E18B8E5B000C49C4D /* EPVNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */; };
+		4499E91F18B8E5B000C49C4D /* EPVNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */; };
 		44D5B80E18AF7B600034A875 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B80D18AF7B600034A875 /* Foundation.framework */; };
 		44D5B81018AF7B600034A875 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B80F18AF7B600034A875 /* CoreGraphics.framework */; };
 		44D5B81218AF7B600034A875 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D5B81118AF7B600034A875 /* UIKit.framework */; };
@@ -45,6 +47,9 @@
 		4499E91818B11AA100C49C4D /* UIImage+RDHColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RDHColor.m"; sourceTree = "<group>"; };
 		4499E91918B12B0200C49C4D /* NSArray+RDHFill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+RDHFill.h"; sourceTree = "<group>"; };
 		4499E91A18B12B0200C49C4D /* NSArray+RDHFill.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RDHFill.m"; sourceTree = "<group>"; };
+		4499E91B18B8E5B000C49C4D /* EPVNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPVNibViewController.h; sourceTree = "<group>"; };
+		4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPVNibViewController.m; sourceTree = "<group>"; };
+		4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPVNibViewController.xib; sourceTree = "<group>"; };
 		44D5B80A18AF7B600034A875 /* RDHExpandingPickerViews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RDHExpandingPickerViews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D5B80D18AF7B600034A875 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		44D5B80F18AF7B600034A875 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -151,6 +156,9 @@
 				44D5B81D18AF7B600034A875 /* EPVAppDelegate.m */,
 				44D5B84B18AF84800034A875 /* EPVViewController.h */,
 				44D5B84C18AF84800034A875 /* EPVViewController.m */,
+				4499E91B18B8E5B000C49C4D /* EPVNibViewController.h */,
+				4499E91C18B8E5B000C49C4D /* EPVNibViewController.m */,
+				4499E91D18B8E5B000C49C4D /* EPVNibViewController.xib */,
 				44D5B81F18AF7B600034A875 /* Images.xcassets */,
 				44D5B81418AF7B600034A875 /* Supporting Files */,
 			);
@@ -310,6 +318,7 @@
 			files = (
 				44D5B81818AF7B600034A875 /* InfoPlist.strings in Resources */,
 				44D5B82018AF7B600034A875 /* Images.xcassets in Resources */,
+				4499E91F18B8E5B000C49C4D /* EPVNibViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4499E91E18B8E5B000C49C4D /* EPVNibViewController.m in Sources */,
 				44D5B81A18AF7B600034A875 /* main.m in Sources */,
 				44D5B84D18AF84800034A875 /* EPVViewController.m in Sources */,
 				44D5B81E18AF7B600034A875 /* EPVAppDelegate.m in Sources */,

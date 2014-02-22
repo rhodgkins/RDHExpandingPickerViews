@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="4514"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EPVNibViewController">
+            <connections>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxm-KN-Opb" customClass="EPVDatePickerInputView">
+                    <rect key="frame" x="0.0" y="30" width="320" height="34"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" placeholder="YES" id="5cy-Az-kUo"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brz-h0-2eT" customClass="EPVExpandingPickerView">
+                    <rect key="frame" x="0.0" y="64" width="320" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" placeholder="YES" id="JDl-qK-fER"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="XQy-aQ-WTi"/>
+                        <outlet property="delegate" destination="-1" id="kQl-F4-hk2"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fxm-KN-Opb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="30" id="1nd-4U-fFK"/>
+                <constraint firstItem="fxm-KN-Opb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="4sd-dZ-Qws"/>
+                <constraint firstItem="Brz-h0-2eT" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="6vy-lx-LlR"/>
+                <constraint firstItem="Brz-h0-2eT" firstAttribute="top" secondItem="fxm-KN-Opb" secondAttribute="bottom" id="eah-3J-V8E"/>
+                <constraint firstAttribute="trailing" secondItem="Brz-h0-2eT" secondAttribute="trailing" id="k3J-lx-LRt"/>
+                <constraint firstAttribute="trailing" secondItem="fxm-KN-Opb" secondAttribute="trailing" id="u4o-qa-ZB9"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>
