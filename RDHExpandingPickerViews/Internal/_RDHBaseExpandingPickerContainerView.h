@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+/// @name Constants
+
 /// Activated == Expanded
 UIKIT_EXTERN const UIControlState RDHControlStateActivated;
 
