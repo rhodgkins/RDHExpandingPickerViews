@@ -1,4 +1,4 @@
-RDHExpandingPickerViews
+RDHExpandingPickerViews <a href="http://badge.fury.io/co/RDHExpandingPickerViews"><img src="https://badge.fury.io/co/RDHExpandingPickerViews@2x.png" alt="Pod version" height="18"></a>
 =======================
 
 Installation:
