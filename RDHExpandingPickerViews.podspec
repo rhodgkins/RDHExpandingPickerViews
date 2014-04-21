@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
   s.platform = :ios, '7.0'
   s.source_files = 'RDHExpandingPickerViews/**/*.{h,m}'
-  s.private_header_files = '**/Internal/**/*'
+  s.public_header_files = 'RDHExpandingPickerViews/DatePicker/**/*.h', 'RDHExpandingPickerViews/Picker**/*.h', 'RDHExpandingPickerViews/Internal/_RDHBaseExpandingPickerContainerView.h'
   
   s.screenshots = ['https://raw.github.com/rhodgkins/RDHExpandingPickerViews/master/Images/unexpanded.png',
                    'https://raw.github.com/rhodgkins/RDHExpandingPickerViews/master/Images/date.png',
