@@ -92,7 +92,6 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
     UIView *pickerView = [self createPickerView];
     pickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     pickerView.alpha = 0;
-    pickerView.tintColor = [UIColor redColor];
     [self addSubview:pickerView];
     _pickerView = pickerView;
     
