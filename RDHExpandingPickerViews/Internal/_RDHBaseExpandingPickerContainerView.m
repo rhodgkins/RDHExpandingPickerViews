@@ -38,6 +38,8 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
 
 @implementation _RDHBaseExpandingPickerContainerView
 
+static BOOL useDefaultStates = YES;
+
 -(instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -107,7 +109,9 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
     
     self.selectedObject = nil;
     
-    [self setupDefaultStates];
+    if (useDefaultStates) {
+        [self setupDefaultStates];
+    }
 }
 
 -(void)setupDefaultStates
@@ -519,6 +523,11 @@ const RDHPickerViewHeight RDHPickerViewHeightHighest = 216.0;
 @end
 
 @implementation _RDHBaseExpandingPickerContainerView (RDHStateDisplay)
+
++(void)setUseDefaultColorStates:(BOOL)useDefaultStatesParameter
+{
+    useDefaultStates = useDefaultStatesParameter;
+}
 
 #pragma mark - Label background color
 

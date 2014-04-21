@@ -71,6 +71,8 @@ UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightHighest;
 ///
 @interface _RDHBaseExpandingPickerContainerView (RDHStateDisplay)
 
++(void)setUseDefaultColorStates:(BOOL)useDefaultStates;
+
 #pragma mark - Label background color
 /// @name Label background color
 
