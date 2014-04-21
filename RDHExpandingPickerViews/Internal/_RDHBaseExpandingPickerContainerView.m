@@ -406,11 +406,11 @@ static BOOL useDefaultStates = YES;
     BOOL result = [super becomeFirstResponder];
     if (result) {
         [self setActivated:YES animated:YES];
-        [self sendActionsForControlEvents:UIControlEventEditingDidBegin];
         // When we're allowed to become first responder set the initial object
         if (!self.selectedObject) {
             self.selectedObject = self.initiallySelectedObject;
         }
+        [self sendActionsForControlEvents:UIControlEventEditingDidBegin];
     }
     return result;
 }
