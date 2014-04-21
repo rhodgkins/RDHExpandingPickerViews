@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		3360A9F4CF934E56B3235F72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		44622E9319058AA800D2F0C9 /* RDHExpandingPickerViews.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = RDHExpandingPickerViews.podspec; path = ../RDHExpandingPickerViews.podspec; sourceTree = "<group>"; };
 		4499E90B18AFC5B200C49C4D /* RDHExpandingPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHExpandingPickerView.h; sourceTree = "<group>"; };
 		4499E90C18AFC5B200C49C4D /* RDHExpandingPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHExpandingPickerView.m; sourceTree = "<group>"; };
 		4499E91018B003F200C49C4D /* RDHDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHDatePicker.h; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		44D5B80118AF7B600034A875 = {
 			isa = PBXGroup;
 			children = (
+				44622E9319058AA800D2F0C9 /* RDHExpandingPickerViews.podspec */,
 				44D5B84518AF83720034A875 /* Classes */,
 				44D5B81318AF7B600034A875 /* RDHExpandingPickerViews */,
 				44D5B82C18AF7B600034A875 /* RDHExpandingPickerViewsTests */,
