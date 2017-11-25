@@ -20,6 +20,8 @@
 
 @implementation RDHExpandingPickerView
 
+@dynamic pickerView, displayValueBlock, selectedObject;
+
 -(void)willMoveToWindow:(UIWindow *)newWindow
 {
     [super willMoveToWindow:newWindow];

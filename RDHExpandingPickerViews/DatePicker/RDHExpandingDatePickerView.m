@@ -21,6 +21,8 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 @implementation RDHExpandingDatePickerView
 
+@dynamic pickerView;
+
 -(void)dealloc
 {
     [self.pickerView removeObserver:self forKeyPath:NSStringFromSelector(@selector(date)) context:RDHContextDate];

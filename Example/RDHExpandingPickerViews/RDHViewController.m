@@ -31,6 +31,8 @@
 
 @implementation RDHViewController
 
+@dynamic view;
+
 -(void)loadView
 {
     self.view = [UIScrollView new];
