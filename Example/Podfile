@@ -1,3 +1,6 @@
-pod 'RDHExpandingPickerViews', :path => '../'
-pod 'UIView-Autolayout'
+platform :ios, '8.0'
 
+target :RDHExpandingPickerViews do
+    pod 'RDHExpandingPickerViews', :path => '../'
+    pod 'UIView-Autolayout', '~> 0.2.0'
+end

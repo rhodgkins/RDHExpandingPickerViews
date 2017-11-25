@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics'
   s.requires_arc = true
 
-  s.platform = :ios, '7.0'
+  s.platform = :ios, '8.0'
   s.source_files = 'RDHExpandingPickerViews/**/*.{h,m}'
   s.public_header_files = 'RDHExpandingPickerViews/DatePicker/**/*.h', 'RDHExpandingPickerViews/Picker**/*.h', 'RDHExpandingPickerViews/Internal/_RDHBaseExpandingPickerContainerView.h'
   

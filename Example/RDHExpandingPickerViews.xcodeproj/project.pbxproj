@@ -22,7 +22,6 @@
 		44D5B83118AF7B600034A875 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44D5B82F18AF7B600034A875 /* InfoPlist.strings */; };
 		44D5B83318AF7B600034A875 /* RDHExpandingPickerViewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B83218AF7B600034A875 /* RDHExpandingPickerViewsTests.m */; };
 		44D5B84D18AF84800034A875 /* RDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D5B84C18AF84800034A875 /* RDHViewController.m */; };
-		B561668A53374483A8CD7EA1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3360A9F4CF934E56B3235F72 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3360A9F4CF934E56B3235F72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44622E9319058AA800D2F0C9 /* RDHExpandingPickerViews.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = RDHExpandingPickerViews.podspec; path = ../RDHExpandingPickerViews.podspec; sourceTree = "<group>"; };
 		4499E90B18AFC5B200C49C4D /* RDHExpandingPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHExpandingPickerView.h; sourceTree = "<group>"; };
 		4499E90C18AFC5B200C49C4D /* RDHExpandingPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHExpandingPickerView.m; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 		44D5B85018AF87E50034A875 /* _RDHBaseExpandingPickerContainerView_RDHInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RDHBaseExpandingPickerContainerView_RDHInternal.h; sourceTree = "<group>"; };
 		44D5B85118AF8B0C0034A875 /* RDHActivationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDHActivationButton.h; sourceTree = "<group>"; };
 		44D5B85218AF8B0C0034A875 /* RDHActivationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDHActivationButton.m; sourceTree = "<group>"; };
-		9240D29960E1496999656D9E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +85,6 @@
 				44D5B81018AF7B600034A875 /* CoreGraphics.framework in Frameworks */,
 				44D5B81218AF7B600034A875 /* UIKit.framework in Frameworks */,
 				44D5B80E18AF7B600034A875 /* Foundation.framework in Frameworks */,
-				B561668A53374483A8CD7EA1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +124,6 @@
 				44D5B82C18AF7B600034A875 /* RDHExpandingPickerViewsTests */,
 				44D5B80C18AF7B600034A875 /* Frameworks */,
 				44D5B80B18AF7B600034A875 /* Products */,
-				9240D29960E1496999656D9E /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,7 +143,6 @@
 				44D5B80F18AF7B600034A875 /* CoreGraphics.framework */,
 				44D5B81118AF7B600034A875 /* UIKit.framework */,
 				44D5B82618AF7B600034A875 /* XCTest.framework */,
-				3360A9F4CF934E56B3235F72 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -249,11 +243,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44D5B83618AF7B600034A875 /* Build configuration list for PBXNativeTarget "RDHExpandingPickerViews" */;
 			buildPhases = (
-				4FFB3E91F25F49A987E601EE /* Check Pods Manifest.lock */,
 				44D5B80618AF7B600034A875 /* Sources */,
 				44D5B80718AF7B600034A875 /* Frameworks */,
 				44D5B80818AF7B600034A875 /* Resources */,
-				4687745D7D1F4664B9EEF66D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,10 +281,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RDH;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Rich H";
 				TargetAttributes = {
+					44D5B80918AF7B600034A875 = {
+						DevelopmentTeam = 8RNG6QDARH;
+					};
 					44D5B82418AF7B600034A875 = {
+						DevelopmentTeam = 8RNG6QDARH;
 						TestTargetID = 44D5B80918AF7B600034A875;
 					};
 				};
@@ -335,39 +331,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4687745D7D1F4664B9EEF66D /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4FFB3E91F25F49A987E601EE /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		44D5B80618AF7B600034A875 /* Sources */ = {
@@ -423,23 +386,34 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -452,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -462,30 +436,40 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -493,13 +477,14 @@
 		};
 		44D5B83718AF7B600034A875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9240D29960E1496999656D9E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 8RNG6QDARH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RDHExpandingPickerViews/RDHExpandingPickerViews-Prefix.pch";
 				INFOPLIST_FILE = "RDHExpandingPickerViews/RDHExpandingPickerViews-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.rhodgkins.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -507,13 +492,14 @@
 		};
 		44D5B83818AF7B600034A875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9240D29960E1496999656D9E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 8RNG6QDARH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RDHExpandingPickerViews/RDHExpandingPickerViews-Prefix.pch";
 				INFOPLIST_FILE = "RDHExpandingPickerViews/RDHExpandingPickerViews-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.rhodgkins.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -522,8 +508,8 @@
 		44D5B83A18AF7B600034A875 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RDHExpandingPickerViews.app/RDHExpandingPickerViews";
+				DEVELOPMENT_TEAM = 8RNG6QDARH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -536,6 +522,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "RDHExpandingPickerViewsTests/RDHExpandingPickerViewsTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.rhodgkins.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -545,8 +532,8 @@
 		44D5B83B18AF7B600034A875 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RDHExpandingPickerViews.app/RDHExpandingPickerViews";
+				DEVELOPMENT_TEAM = 8RNG6QDARH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -555,6 +542,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RDHExpandingPickerViews/RDHExpandingPickerViews-Prefix.pch";
 				INFOPLIST_FILE = "RDHExpandingPickerViewsTests/RDHExpandingPickerViewsTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.rhodgkins.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
