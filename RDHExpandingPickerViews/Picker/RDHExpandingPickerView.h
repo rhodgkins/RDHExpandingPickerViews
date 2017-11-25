@@ -45,19 +45,19 @@
 /// @name Item selection
 
 /// Each element in the array should be a `NSNumber` and is the row you want selected in the component for that index. The number of items should match the `-numberOfComponents`.
-@property (nonatomic, copy) NSArray *selectedObject;
+@property (nonatomic, copy) NSArray<NSNumber *> *selectedObject;
 
 /// @see selectedObject
--(void)setSelectedObject:(NSArray *)selectedObject animated:(BOOL)animated;
+-(void)setSelectedObject:(NSArray<NSNumber *> *)selectedObject animated:(BOOL)animated;
 
 #pragma mark - Display blocks
 /// @name Display blocks
 
 /// This will be ignored if `attributedDisplayValueBlock` is set or returns `nil`.
-@property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
+@property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
 
 /// This will be used over `displayValueBlock`.
-@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray *selectedObject);
+@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
 
 @end
 
