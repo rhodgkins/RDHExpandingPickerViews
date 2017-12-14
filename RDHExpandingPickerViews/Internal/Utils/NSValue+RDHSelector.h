@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// NSValue wrapped for selectors.
 @interface NSValue (RDHSelector)
 
@@ -20,3 +22,5 @@
 -(SEL)selector;
 
 @end
+
+NS_ASSUME_NONNULL_END

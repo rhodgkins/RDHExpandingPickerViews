@@ -292,7 +292,7 @@ static BOOL useDefaultStates = YES;
     }
     // Layout the button
     [CATransaction begin];
-    [CATransaction setDisableActions: YES];
+    [CATransaction setDisableActions:YES];
     [self.button layoutIfNeeded];
     [CATransaction commit];
 }
@@ -441,6 +441,7 @@ static BOOL useDefaultStates = YES;
 
 -(id)initiallySelectedObject
 {
+    NSAssert(NO, @"Should be implemented by sub-classes");
     return nil;
 }
 

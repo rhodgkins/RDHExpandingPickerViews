@@ -8,6 +8,8 @@
 
 #import "_RDHBaseExpandingPickerContainerView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol RDHExpandingPickerViewDataSource, RDHExpandingPickerViewDelegate;
 
 /// Expanding picker view backed by a `UIPickerView`.
@@ -45,7 +47,7 @@
 /// @name Item selection
 
 /// Each element in the array should be a `NSNumber` and is the row you want selected in the component for that index. The number of items should match the `-numberOfComponents`.
-@property (nonatomic, copy) NSArray<NSNumber *> *selectedObject;
+@property (nonatomic, copy, nullable) NSArray<NSNumber *> *selectedObject;
 
 /// @see selectedObject
 -(void)setSelectedObject:(NSArray<NSNumber *> *)selectedObject animated:(BOOL)animated;
@@ -54,10 +56,10 @@
 /// @name Display blocks
 
 /// This will be ignored if `attributedDisplayValueBlock` is set or returns `nil`.
-@property (nonatomic, copy) NSString*(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
+@property (nonatomic, copy) NSString* _Nullable(^displayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
 
 /// This will be used over `displayValueBlock`.
-@property (nonatomic, copy) NSAttributedString*(^attriburedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
+@property (nonatomic, copy) NSAttributedString* _Nullable(^attributedDisplayValueBlock)(RDHExpandingPickerView *expandingPickerView, NSArray<NSNumber *> *selectedObject);
 
 @end
 
@@ -119,7 +121,7 @@
  *
  * @return the title for the row in the component.
  */
--(NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
+-(nullable NSString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView titleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
 
 /**
  * This method overrides `-expandingPickerView:titleForRow:forComponent:` but ignored if `-expandingPickerView:viewForRow:forComponent:reusingView:` is implemented.
@@ -130,7 +132,7 @@
  *
  * @return the attributed title for the row in the component.
  */
--(NSAttributedString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView attributedTitleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
+-(nullable NSAttributedString *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView attributedTitleForRow:(NSUInteger)row forComponent:(NSUInteger)component;
 
 /**
  * This method overrides `-expandingPickerView:titleForRow:forComponent:` and `-expandingPickerView:attributedTitleForRow:forComponent:`if it is implemented.
@@ -142,7 +144,7 @@
  *
  * @return the view for the row in the component.
  */
--(UIView *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView viewForRow:(NSUInteger)row forComponent:(NSUInteger)component reusingView:(UIView *)view;
+-(UIView *)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView viewForRow:(NSUInteger)row forComponent:(NSUInteger)component reusingView:(nullable UIView *)view;
 
 @optional
 #pragma mark - Selection methods
@@ -156,3 +158,6 @@
 -(void)expandingPickerView:(RDHExpandingPickerView *)expandingPickerView didSelectRow:(NSUInteger)row inComponent:(NSUInteger)component;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

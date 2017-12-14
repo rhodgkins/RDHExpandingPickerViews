@@ -24,9 +24,9 @@ static NSString *const RDHStateKeyAttributedText = @"attributedText";
 
 @interface RDHActivationButton ()
 
-@property (nonatomic, copy) NSMutableDictionary *backgroundStateColors;
+@property (nonatomic, copy, readonly) NSMutableDictionary *backgroundStateColors;
 
-@property (nonatomic, copy) NSMutableDictionary *infoStates;
+@property (nonatomic, copy, readonly) NSMutableDictionary *infoStates;
 
 @end
 

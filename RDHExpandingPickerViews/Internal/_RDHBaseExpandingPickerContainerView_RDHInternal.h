@@ -8,6 +8,8 @@
 
 #import "_RDHBaseExpandingPickerContainerView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface _RDHBaseExpandingPickerContainerView ()
 
 #pragma mark - Exposed base class methods
@@ -19,7 +21,7 @@
 -(void)updateValueDisplay;
 
 /// The `UIPicker` or `UIDatePicker` input view
-@property (nonatomic, weak, readonly) UIView *pickerView;
+@property (nonatomic, assign, readonly) UIView *pickerView;
 
 #pragma mark - Required subclass methods
 
@@ -35,12 +37,12 @@
 -(NSString *)defaultDisplayValueForSelectedObject;
 
 /// @returns Default implemention returns `nil` if there is no `attriburedDisplayValueBlock` set.
--(NSAttributedString *)defaultAttributedDisplayValueForSelectedObject;
+-(nullable NSAttributedString *)defaultAttributedDisplayValueForSelectedObject;
 
 #pragma mark - Object selection
 
 /// The selected object, a `NSDate` for date pickers or `NSArray` of selected row components for normal pickers.
-@property (nonatomic, copy) id selectedObject;
+@property (nonatomic, copy, nullable) id selectedObject;
 
 /**
  * @param selectedObject The same as `selectedObject`.
@@ -48,15 +50,18 @@
  *
  * @see `selectedObject`
  */
--(void)setSelectedObject:(id)selectedObject animated:(BOOL)animated;
+-(void)setSelectedObject:(nullable id)selectedObject animated:(BOOL)animated;
 
 /// Inital object for `selectedObject`.
-@property (nonatomic, weak, readonly) id initiallySelectedObject;
+@property (nonatomic, readonly) id initiallySelectedObject;
 
 #pragma mark - Display blocks
 
-@property (nonatomic, copy) NSString*(^displayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
+@property (nonatomic, copy, nullable)  NSString* _Nullable (^displayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
 
-@property (nonatomic, copy) NSAttributedString*(^attributedDisplayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
+@property (nonatomic, copy, nullable)  NSAttributedString* _Nullable (^attributedDisplayValueBlock)(_RDHBaseExpandingPickerContainerView *expandingPickerView, id selectedObject);
 
 @end
+
+NS_ASSUME_NONNULL_END
+

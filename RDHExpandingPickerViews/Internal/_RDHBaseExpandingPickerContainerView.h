@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// @name Constants
 
 /// Activated == Expanded
@@ -76,65 +78,65 @@ UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightHighest;
 #pragma mark - Label background color
 /// @name Label background color
 
--(void)setLabelBackgroundColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;                     // default is transparent black.
+-(void)setLabelBackgroundColor:(nullable UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;                     // default is transparent black.
 
 -(UIColor *)labelBackgroundColorForState:(UIControlState)state;          // these getters only take a single state value
 
-@property (nonatomic, readonly, strong) UIColor *currentLabelBackgroundColor;  // normal/highlighted/selected/disabled. can return nil
+@property (nonatomic, readonly, strong, nullable) UIColor *currentLabelBackgroundColor;  // normal/highlighted/selected/disabled. can return nil
 
 #pragma mark - Title display
 /// @name Title display
 
-@property (nonatomic, strong) UIFont *titleFont;
+@property (nonatomic, strong, null_resettable) UIFont *titleFont;
 
 // you can set the image, title color, title shadow color, and background image to use for each state. you can specify data
 // for a combined state by using the flags added together. in general, you should specify a value for the normal state to be used
 // by other states which don't have a custom value set
 
--(void)setTitle:(NSString *)title forState:(UIControlState)state;                     // default is nil. title is assumed to be single line
--(void)setTitleColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default if nil. use opaque white
--(void)setTitleShadowColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default is nil. use 50% black
--(void)setAttributedTitle:(NSAttributedString *)title forState:(UIControlState)state; // default is nil. title is assumed to be single line
+-(void)setTitle:(nullable NSString *)title forState:(UIControlState)state;                     // default is nil. title is assumed to be single line
+-(void)setTitleColor:(nullable UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default if nil. use opaque white
+-(void)setTitleShadowColor:(nullable UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default is nil. use 50% black
+-(void)setAttributedTitle:(nullable NSAttributedString *)title forState:(UIControlState)state; // default is nil. title is assumed to be single line
 
--(NSString *)titleForState:(UIControlState)state;          // these getters only take a single state value
--(UIColor *)titleColorForState:(UIControlState)state;
--(UIColor *)titleShadowColorForState:(UIControlState)state;
--(NSAttributedString *)attributedTitleForState:(UIControlState)state;
+-(nullable NSString *)titleForState:(UIControlState)state;          // these getters only take a single state value
+-(nullable UIColor *)titleColorForState:(UIControlState)state;
+-(nullable UIColor *)titleShadowColorForState:(UIControlState)state;
+-(nullable NSAttributedString *)attributedTitleForState:(UIControlState)state;
 
 // these are the values that will be used for the current state. you can also use these for overrides. a heuristic will be used to
 // determine what image to choose based on the explict states set. For example, the 'normal' state value will be used for all states
 // that don't have their own image defined.
 
-@property(nonatomic, readonly, strong) NSString *currentTitle;             // normal/highlighted/selected/disabled. can return nil
-@property(nonatomic, readonly, strong) UIColor  *currentTitleColor;        // normal/highlighted/selected/disabled. always returns non-nil. default is white(1,1)
-@property(nonatomic, readonly, strong) UIColor  *currentTitleShadowColor;  // normal/highlighted/selected/disabled. default is white(0,0.5).
-@property(nonatomic, readonly, strong) NSAttributedString *currentAttributedTitle;  // normal/highlighted/selected/disabled. can return nil
+@property(nonatomic, readonly, strong, nullable) NSString *currentTitle;             // normal/highlighted/selected/disabled. can return nil
+@property(nonatomic, readonly, strong, nullable) UIColor  *currentTitleColor;        // normal/highlighted/selected/disabled. always returns non-nil. default is white(1,1)
+@property(nonatomic, readonly, strong, nullable) UIColor  *currentTitleShadowColor;  // normal/highlighted/selected/disabled. default is white(0,0.5).
+@property(nonatomic, readonly, strong, nullable) NSAttributedString *currentAttributedTitle;  // normal/highlighted/selected/disabled. can return nil
 
 /// The title label itself, this should **not** be used for setting the font, text value, attributed text value, text color or shadow color.
-@property (nonatomic, weak, readonly) UILabel *titleLabel;
+@property (nonatomic, assign, readonly) UILabel *titleLabel;
 
 #pragma mark - Value display
 /// @name Value display
 
 /// Placeholder text for when no value is selected - states normal, normal/highlighted, normal/highlighted/activated, normal/activated
-@property (nonatomic, copy) NSString *placeholderValue;
+@property (nonatomic, copy, nullable) NSString *placeholderValue;
 
 /// Attributed placeholder text for when no value is selected - states normal, normal/highlighted, normal/highlighted/activated, normal/activated
-@property (nonatomic, copy) NSAttributedString *attributedPlaceholderValue;
+@property (nonatomic, copy, nullable) NSAttributedString *attributedPlaceholderValue;
 
 /// Placeholder text color for when no value is selected - states normal, normal/highlighted, normal/highlighted/activated, normal/activated
-@property (nonatomic, strong) UIColor *placeholderValueColor;
+@property (nonatomic, strong, nullable) UIColor *placeholderValueColor;
 
-@property (nonatomic, strong) UIFont *valueFont;
+@property (nonatomic, strong, null_resettable) UIFont *valueFont;
 
--(void)setValueColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default if nil. use opaque white
--(void)setValueShadowColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default is nil. use 50% black
+-(void)setValueColor:(nullable UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default if nil. use opaque white
+-(void)setValueShadowColor:(nullable UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR; // default is nil. use 50% black
 
--(UIColor *)valueColorForState:(UIControlState)state;
--(UIColor *)valueShadowColorForState:(UIControlState)state;
+-(nullable UIColor *)valueColorForState:(UIControlState)state;
+-(nullable UIColor *)valueShadowColorForState:(UIControlState)state;
 
-@property(nonatomic, readonly, strong) UIColor  *currentValueColor;        // normal/highlighted/selected/disabled. always returns non-nil. default is white(1,1)
-@property(nonatomic, readonly, strong) UIColor  *currentValueShadowColor;  // normal/highlighted/selected/disabled. default is white(0,0.5).
+@property(nonatomic, readonly, strong, nullable) UIColor  *currentValueColor;        // normal/highlighted/selected/disabled. default is white(1,1)
+@property(nonatomic, readonly, strong, nullable) UIColor  *currentValueShadowColor;  // normal/highlighted/selected/disabled. default is white(0,0.5).
 
 /// The value label itself, this should **not** be used for setting the font, text value, attributed text value, text color or shadow color.
 @property (nonatomic, weak, readonly) UILabel *valueLabel;
@@ -147,6 +149,8 @@ UIKIT_EXTERN const RDHPickerViewHeight RDHPickerViewHeightHighest;
 /// @name Picker background
 
 /// The default value is `[UIColor clearColor]`
-@property (nonatomic, strong) UIColor *pickerViewBackgroundColor;
+@property (nonatomic, strong, null_resettable) UIColor *pickerViewBackgroundColor;
 
 @end
+
+NS_ASSUME_NONNULL_END

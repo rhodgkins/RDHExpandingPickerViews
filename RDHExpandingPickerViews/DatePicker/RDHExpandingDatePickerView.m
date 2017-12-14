@@ -17,6 +17,8 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 @interface RDHExpandingDatePickerView ()
 
+@property (nonatomic, readonly, getter=isCountDownTimer) BOOL countDownTimer;
+
 @end
 
 @implementation RDHExpandingDatePickerView
@@ -78,7 +80,7 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(id)initiallySelectedObject
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         return @(self.pickerView.countDownDuration);
     } else {
         return self.pickerView.date;
@@ -89,10 +91,14 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 {
     NSString *value = nil;
     
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         
-        // Use the time since reference date to display as this will be formatted correctly and the maximum countdown time is 23:59
-        value = [[[self class] countDownDateFormatter] stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:self.selectedTimeInterval]];
+        if (self.timeIntervalFormatter) {
+            value = [self.timeIntervalFormatter stringForObjectValue:@(self.selectedTimeInterval)];
+        } else {
+            // Use the time since reference date to display as this will be formatted correctly and the maximum countdown time is 23:59
+            value = [[[self class] countDownDateFormatter] stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:self.selectedTimeInterval]];
+        }
     } else {
         
         if (self.dateFormatter) {
@@ -122,7 +128,7 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 -(void)setSelectedObject:(id)selectedObject animated:(BOOL)animated
 {
     if (!selectedObject) {
-        if ([self isCountDownTimer]) {
+        if (self.countDownTimer) {
             [self setSelectedTimeInterval:0 animated:animated];
         } else {
             [self setSelectedDate:nil animated:animated];
@@ -140,7 +146,7 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(NSDate *)selectedDate
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         NSLog(@"You are trying to get a date on a count down timer UIDatePicker, change the mode first.");
         return nil;
     } else {
@@ -155,18 +161,19 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         NSLog(@"You are trying to set a date on a count down timer UIDatePicker, change the mode first. Nothing has been done.");
     } else {
         NSDate *previousSelectedObject = self.selectedObject;
         
         [super setSelectedObject:selectedDate animated:animated];
         
-        if (![previousSelectedObject isEqualToDate:selectedDate]) {
-            
-            if (selectedDate) {
+        if (selectedDate) {
+            if (![previousSelectedObject isEqualToDate:selectedDate]) {
                 [self.pickerView setDate:selectedDate animated:animated];
-            } else {
+            }
+        } else {
+            if (previousSelectedObject) {
                 [self.pickerView setDate:[NSDate date] animated:animated];
             }
         }
@@ -177,7 +184,7 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(NSTimeInterval)selectedTimeInterval
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         return [self.selectedObject doubleValue];
     } else {
         NSLog(@"You are trying to get a time interval on a date UIDatePicker, change the mode first.");
@@ -192,7 +199,7 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(void)setSelectedTimeInterval:(NSTimeInterval)selectedTimeInterval animated:(BOOL)animated
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         NSNumber *previousSelectedObject = self.selectedObject;
         
         [super setSelectedObject:@(selectedTimeInterval) animated:animated];
@@ -209,13 +216,59 @@ static void *RDHContextDatePickerMode = &RDHContextDatePickerMode;
 
 -(void)didChangeValue
 {
-    if ([self isCountDownTimer]) {
+    if (self.countDownTimer) {
         self.selectedTimeInterval = self.pickerView.countDownDuration;
     } else {
         self.selectedDate = self.pickerView.date;
     }
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+}
+
+#pragma mark - Display blocks
+
+-(void)setDateDisplayValueBlock:(NSString* _Nullable (^)(RDHExpandingDatePickerView * _Nonnull, NSDate * _Nonnull))block
+{
+    NSAssert(!self.countDownTimer, @"Calling %@ on count down timer", NSStringFromSelector(_cmd));
+    
+    if (block) {
+        self.displayValueBlock = ^NSString* _Nullable (_RDHBaseExpandingPickerContainerView* pv, NSDate* date) { return block((RDHExpandingDatePickerView*)pv, date); };
+    } else {
+        self.displayValueBlock = nil;
+    }
+}
+
+-(void)setAttributedDateDisplayValueBlock:(NSAttributedString * _Nullable (^)(RDHExpandingDatePickerView * _Nonnull, NSDate * _Nonnull))block
+{
+    NSAssert(!self.countDownTimer, @"Calling %@ on count down timer", NSStringFromSelector(_cmd));
+    
+    if (block) {
+        self.attributedDisplayValueBlock = ^NSAttributedString* _Nullable (_RDHBaseExpandingPickerContainerView* pv, NSDate* date) { return block((RDHExpandingDatePickerView*)pv, date); };
+    } else {
+        self.displayValueBlock = nil;
+    }
+}
+
+-(void)setTimeIntervalDisplayValueBlock:(NSString* _Nullable (^)(RDHExpandingDatePickerView * _Nonnull, NSTimeInterval))block
+{
+    NSAssert(self.countDownTimer, @"Calling %@ on non-count down timer", NSStringFromSelector(_cmd));
+    
+    if (block) {
+        self.displayValueBlock = ^NSString *(_RDHBaseExpandingPickerContainerView* pv, NSNumber *tI) { return block((RDHExpandingDatePickerView*)pv, tI.doubleValue); };
+    } else {
+        self.displayValueBlock = nil;
+    }
+}
+
+-(void)setAttributedTimeIntervalDisplayValueBlock:(NSAttributedString * _Nullable (^)(RDHExpandingDatePickerView * _Nonnull, NSTimeInterval))block
+{
+    NSAssert(self.countDownTimer, @"Calling %@ on non-count down timer", NSStringFromSelector(_cmd));
+    
+    if (block) {
+        self.attributedDisplayValueBlock = ^NSAttributedString* _Nullable (_RDHBaseExpandingPickerContainerView* pv, NSNumber* tI) { return block((RDHExpandingDatePickerView*)pv, tI.doubleValue); };
+    } else {
+        self.displayValueBlock = nil;
+    }
 }
 
 #pragma mark - Count down date formatting

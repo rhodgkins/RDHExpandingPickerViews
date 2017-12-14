@@ -20,7 +20,7 @@
 
 @implementation RDHExpandingPickerView
 
-@dynamic pickerView, displayValueBlock, selectedObject;
+@dynamic pickerView, selectedObject, displayValueBlock, attributedDisplayValueBlock;
 
 -(void)willMoveToWindow:(UIWindow *)newWindow
 {
@@ -292,5 +292,7 @@
     });
     return mappedSelectors;
 }
+
+#undef RDH_SEL_VALUE
 
 @end
