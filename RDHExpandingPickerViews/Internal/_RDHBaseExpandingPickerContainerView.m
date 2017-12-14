@@ -83,8 +83,8 @@ static BOOL useDefaultStates = YES;
     
     self.labelEdgeInsets = UIEdgeInsetsZero;
     
-    [self setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
-    [self setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
+    [self setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     
     RDHActivationButton *button = [RDHActivationButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -99,7 +99,7 @@ static BOOL useDefaultStates = YES;
     
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
     heightConstraint.priority = UILayoutPriorityRequired;
-    [self addConstraint:heightConstraint];
+    heightConstraint.active = YES;
     _heightConstraint = heightConstraint;
     
     self.pickerViewBackgroundColor = [UIColor clearColor];
