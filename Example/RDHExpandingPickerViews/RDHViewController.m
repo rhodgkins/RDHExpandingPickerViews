@@ -8,8 +8,6 @@
 
 #import "RDHViewController.h"
 
-#import <UIView-Autolayout/UIView+AutoLayout.h>
-
 #import <RDHExpandingPickerViews/RDHExpandingDatePickerView.h>
 #import <RDHExpandingPickerViews/RDHExpandingPickerView.h>
 
@@ -35,9 +33,9 @@
 
 -(void)loadView
 {
-    self.view = [UIScrollView new];
-        
-    RDHExpandingDatePickerView *datePickerInputView = [RDHExpandingDatePickerView autoLayoutView];
+    NSMutableArray<UIView *> *views = [NSMutableArray array];
+    
+    RDHExpandingDatePickerView *datePickerInputView = [RDHExpandingDatePickerView new];
     datePickerInputView.titleLabel.tintColor = [UIColor greenColor];
 //    [self setup:datePickerInputView];
 //    datePickerInputView.titleLabel.text = @"Title";
@@ -54,14 +52,10 @@
 //    datePickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor lightGrayColor];
     [datePickerInputView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [datePickerInputView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
-    [self.view addSubview:datePickerInputView];
+    [views addObject:datePickerInputView];
     self.datePickerInputView = datePickerInputView;
     
-    [datePickerInputView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofItem:self.topLayoutGuide inset:CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame)];
-    [datePickerInputView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
- 
-    
-    RDHExpandingDatePickerView *countDownPickerInputView = [RDHExpandingDatePickerView autoLayoutView];
+    RDHExpandingDatePickerView *countDownPickerInputView = [RDHExpandingDatePickerView new];
 //    [self setup:countDownPickerInputView];
     countDownPickerInputView.pickerView.datePickerMode = UIDatePickerModeCountDownTimer;
 //    countDownPickerInputView.selectedTimeInterval = 2213;
@@ -76,14 +70,10 @@
 //    countDownPickerInputView.displayExpandedHighlightedBackgroundColor = [UIColor magentaColor];
     [countDownPickerInputView addTarget:self action:@selector(editingDidBeingForExpandingPickerView:) forControlEvents:UIControlEventEditingDidBegin];
     [countDownPickerInputView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
-    [self.view addSubview:countDownPickerInputView];
+    [views addObject:countDownPickerInputView];
     self.countDownPickerInputView = countDownPickerInputView;
     
-    [countDownPickerInputView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:datePickerInputView inset:20];
-    [countDownPickerInputView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
-    
-    
-    RDHExpandingPickerView *expandingPickerView = [RDHExpandingPickerView autoLayoutView];
+    RDHExpandingPickerView *expandingPickerView = [RDHExpandingPickerView new];
     expandingPickerView.placeholderValue = @"Picker";
 //    [self setup:expandingPickerView];
 //    expandingPickerView.displayBackgroundColor = [UIColor yellowColor];
@@ -99,12 +89,8 @@
     [expandingPickerView addTarget:self action:@selector(editingDidEndForExpandingPickerView:) forControlEvents:UIControlEventEditingDidEnd];
 //    expandingPickerView.placeholderValueColor = [UIColor blueColor];
     
-    [self.view addSubview:expandingPickerView];
+    [views addObject:expandingPickerView];
     self.expandingPickerView = expandingPickerView;
-    
-    [expandingPickerView pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofItem:countDownPickerInputView inset:20];
-    [expandingPickerView pinToSuperviewEdges:JRTViewPinLeftEdge | JRTViewPinRightEdge inset:0];
-    [expandingPickerView pinEdge:NSLayoutAttributeBottom toEdge:NSLayoutAttributeBottom ofItem:self.bottomLayoutGuide];
     
     double delayInSeconds = 5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -126,15 +112,6 @@
     }
     self.pickerItems = pickerItems;
     
-//    UIButton *b = [UIButton autoLayoutView];
-//    [b setTitle:@"TITLE" forState:UIControlStateNormal];
-//    [b setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [b setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-//    [b addTarget:self action:@selector(numberOfComponentsInExpandingPickerView:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.view addSubview:b];
-//    [b pinToSuperviewEdges:JRTViewPinAllEdges inset:10];
-    
     [datePickerInputView setTitle:@"Date Picker" forState:UIControlStateNormal];
     [countDownPickerInputView setTitle:@"Count Down Picker" forState:UIControlStateNormal];
     [expandingPickerView setTitle:@"Picker" forState:UIControlStateNormal];
@@ -142,6 +119,37 @@
     datePickerInputView.placeholderValue = @"Date";
     countDownPickerInputView.placeholderValue = @"Timer";
     expandingPickerView.placeholderValue = @"Item";
+    
+    
+    self.view = [UIScrollView new];
+    
+    UIStackView *sv = [[UIStackView alloc] initWithArrangedSubviews:views];
+    sv.spacing = 20;
+    sv.axis = UILayoutConstraintAxisVertical;
+    sv.distribution = UIStackViewDistributionFill;
+    sv.alignment = UIStackViewAlignmentFill;
+    
+    sv.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray<NSLayoutConstraint *>* constraits;
+    if (@available(iOS 11.0, *)) {
+        constraits = @[
+           [sv.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0],
+           [sv.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:0],
+           [sv.bottomAnchor constraintGreaterThanOrEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:0],
+           [sv.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:0],
+        ];
+    } else {
+        constraits = @[
+           [sv.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:0],
+           [sv.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0],
+           [sv.bottomAnchor constraintGreaterThanOrEqualToAnchor:self.bottomLayoutGuide.topAnchor constant:0],
+           [sv.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0],
+       ];
+    }
+    
+    [self.view addSubview:sv];
+    [NSLayoutConstraint activateConstraints:constraits];
 }
 
 -(void)setup:(_RDHBaseExpandingPickerContainerView *)datePickerInputView
